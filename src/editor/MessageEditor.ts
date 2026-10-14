@@ -24,10 +24,10 @@ export class MessageEditor {
 
     const sHeader = document.createElement('div');
     sHeader.style.cssText = 'padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;';
-    sHeader.innerHTML = '<span style="font-weight: bold; font-size: 13px;">Phone Scripts</span>';
+    sHeader.innerHTML = '<span style="font-weight: bold; font-size: 13px;">手机短信剧本</span>';
 
     const addBtn = document.createElement('button');
-    addBtn.innerText = '+ New';
+    addBtn.innerText = '+ 新建剧本';
     addBtn.style.cssText = 'background: #2196f3; border: none; border-radius: 4px; color: #fff; padding: 4px 8px; font-size: 11px; cursor: pointer;';
     addBtn.onclick = () => {
       const newId = `msg_script_${Date.now()}`;
@@ -41,8 +41,8 @@ export class MessageEditor {
             id: `m_${Date.now()}`,
             senderId: 'assistant',
             type: 'text',
-            content: 'Hello detective, need any help?',
-            replies: [{ id: 'r1', text: 'I am on it!' }],
+            content: '侦探！需要什么帮助随时呼我。',
+            replies: [{ id: 'r1', text: '收到，正在现场调查！' }],
           },
         ],
       };
@@ -59,7 +59,7 @@ export class MessageEditor {
       const item = document.createElement('div');
       const isSel = id === this.selectedId;
       item.style.cssText = `padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; background: ${isSel ? '#283593' : 'transparent'};`;
-      item.innerHTML = `<div style="font-weight: bold; font-size: 13px;">${id}</div><div style="font-size: 11px; color: #aaa;">Sender: ${script.characterId}</div>`;
+      item.innerHTML = `<div style="font-weight: bold; font-size: 13px;">${id}</div><div style="font-size: 11px; color: #aaa;">发件人: ${script.characterId}</div>`;
       item.onclick = () => {
         this.selectedId = id;
         this.render();
@@ -74,34 +74,34 @@ export class MessageEditor {
     main.style.cssText = 'flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px;';
 
     if (!this.selectedId || !this.messages[this.selectedId]) {
-      main.innerHTML = '<div style="color: #888;">Select a message script to edit.</div>';
+      main.innerHTML = '<div style="color: #888;">请在左侧选择要编辑的手机剧本。</div>';
     } else {
       const script = this.messages[this.selectedId];
       main.innerHTML = `
-        <h3 style="margin: 0; color: #64b5f6;">Phone Message Script: ${script.id}</h3>
+        <h3 style="margin: 0; color: #64b5f6;">手机剧本详情: ${script.id}</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <div>
-            <label style="font-size: 12px; color: #aaa;">Character ID (Sender)</label>
+            <label style="font-size: 12px; color: #aaa;">发件人角色标识 (Character ID)</label>
             <input id="script-char" type="text" value="${script.characterId}" style="width: 100%; padding: 6px; background: #1c2237; border: 1px solid #3d496e; border-radius: 4px; color: #fff; margin-top: 4px;">
           </div>
           <div>
-            <label style="font-size: 12px; color: #aaa;">Trigger Once?</label>
+            <label style="font-size: 12px; color: #aaa;">触发策略</label>
             <select id="script-once" style="width: 100%; padding: 6px; background: #1c2237; border: 1px solid #3d496e; border-radius: 4px; color: #fff; margin-top: 4px;">
-              <option value="true" ${script.triggerOnce ? 'selected' : ''}>Yes (仅触发一次)</option>
-              <option value="false" ${!script.triggerOnce ? 'selected' : ''}>No</option>
+              <option value="true" ${script.triggerOnce ? 'selected' : ''}>仅触发一次 (Trigger Once)</option>
+              <option value="false" ${!script.triggerOnce ? 'selected' : ''}>可重复触发 (Repeatable)</option>
             </select>
           </div>
         </div>
 
-        <h4 style="margin: 12px 0 6px 0; color: #ffd54f;">Messages in Conversation:</h4>
+        <h4 style="margin: 12px 0 6px 0; color: #ffd54f;">会话气泡消息列表:</h4>
         <div id="messages-list" style="display: flex; flex-direction: column; gap: 10px;">
           ${script.messages
             .map(
               (m, i) => `
             <div style="padding: 12px; background: #1c2237; border-radius: 6px; border: 1px solid #3d496e;">
-              <div style="font-weight: bold; font-size: 12px; color: #90caf9;">Message ${i + 1} (${m.type})</div>
+              <div style="font-weight: bold; font-size: 12px; color: #90caf9;">消息 ${i + 1} (${m.type === 'text' ? '文本气泡' : m.type})</div>
               <div style="margin-top: 6px; font-size: 13px; color: #fff;">"${m.content}"</div>
-              ${m.replies?.length ? `<div style="font-size: 11px; color: #aaa; margin-top: 4px;">Replies: [${m.replies.map((r) => r.text).join(', ')}]</div>` : ''}
+              ${m.replies?.length ? `<div style="font-size: 11px; color: #aaa; margin-top: 4px;">玩家回复项: [${m.replies.map((r) => r.text).join(', ')}]</div>` : ''}
             </div>
           `
             )

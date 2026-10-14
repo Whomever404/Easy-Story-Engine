@@ -5,7 +5,7 @@ export const sampleProjectData: ProjectData = {
     format: 'esproj',
     formatVersion: 3,
     engine: '>=0.9.0',
-    name: 'The Case of the Midnight Rain',
+    name: '午夜之雨案',
     id: 'com.ese.demo.midnightrain',
     created: 1730000000,
     modified: 1730000000,
@@ -18,18 +18,18 @@ export const sampleProjectData: ProjectData = {
   system: {
     startMode: 'avg',
     startEvent: 'ch1.prologue',
-    gameTitle: 'The Case of the Midnight Rain',
+    gameTitle: '午夜之雨案',
     version: '1.0.0',
     initialParty: ['detective'],
     initialGold: 150,
-    terms: { hp: 'HP', mp: 'MP', gold: 'Gold' },
+    terms: { hp: '生命值', mp: '法力值', gold: '金币' },
     audioPolicy: 'continue',
   },
   characters: {
     detective: {
       id: 'detective',
-      name: 'Detective Ren',
-      title: 'Ace Investigator',
+      name: '任侦探',
+      title: '王牌调查员',
       initialAffection: 0,
       sprites: {
         portrait: {
@@ -42,7 +42,7 @@ export const sampleProjectData: ProjectData = {
       traits: [
         {
           id: 'observation',
-          name: 'Observation (观察力)',
+          name: '敏锐观察力',
           modeMapping: {
             avg: { presentHintLevel: 1 },
             rpg: { hitRateBonus: 0.05 },
@@ -53,8 +53,8 @@ export const sampleProjectData: ProjectData = {
     },
     assistant: {
       id: 'assistant',
-      name: 'Maya',
-      title: 'Spirit Medium Assistant',
+      name: '真宵',
+      title: '见习灵媒助手',
       initialAffection: 25,
       sprites: {
         portrait: {
@@ -73,8 +73,8 @@ export const sampleProjectData: ProjectData = {
     },
     suspect: {
       id: 'suspect',
-      name: 'Mr. Vance',
-      title: 'Antiques Dealer',
+      name: '凡斯先生',
+      title: '古董店商人',
       sprites: {
         portrait: {
           normal: 'assets/images/vance_norm.png',
@@ -86,7 +86,7 @@ export const sampleProjectData: ProjectData = {
     },
     guard: {
       id: 'guard',
-      name: 'Officer Drake',
+      name: '德雷克警长',
       sprites: {
         portrait: {
           normal: 'assets/images/drake_norm.png',
@@ -101,9 +101,9 @@ export const sampleProjectData: ProjectData = {
     wet_umbrella: {
       id: 'wet_umbrella',
       base: {
-        name: 'Dripping Umbrella',
+        name: '湿漉漉的雨伞',
         icon: 'umbrella.png',
-        desc: 'A soaked umbrella recovered from the coffee shop alleyway.',
+        desc: '在咖啡馆后巷发现的一把浸满雨水的蓝色雨伞。',
         storyTags: ['evidence', 'rain'],
       },
       facets: {
@@ -111,7 +111,7 @@ export const sampleProjectData: ProjectData = {
           category: 'evidence',
           unlockFlags: ['knows_umbrella_found'],
           presentReactions: {
-            suspect: { text: "H-Hey! Where did you dig up that drenched umbrella?!" },
+            suspect: { text: "这……这把还在滴水的雨伞，你从哪翻出来的？！" },
           },
         },
         rpg: {
@@ -122,16 +122,16 @@ export const sampleProjectData: ProjectData = {
         },
         debate: {
           contradictionIds: ['s3'],
-          pressResponse: "Look closely! The umbrella is still dripping wet with rainwater!",
+          pressResponse: "仔细看！这把伞上还滴着新鲜的暴雨雨水！",
         },
       },
     },
     herbal_tea: {
       id: 'herbal_tea',
       base: {
-        name: 'Soothing Herbal Tea',
+        name: '舒缓草药茶',
         icon: 'tea.png',
-        desc: 'Warm chamomile tea that lifts the spirits.',
+        desc: '温热清香的洋甘菊茶，能有效舒缓疲劳与情绪。',
         storyTags: ['gift', 'drink'],
       },
       facets: {
@@ -151,9 +151,9 @@ export const sampleProjectData: ProjectData = {
     iron_sword: {
       id: 'iron_sword',
       base: {
-        name: 'Town Guard Sword',
+        name: '城镇警卫佩剑',
         icon: 'sword.png',
-        desc: 'A well-balanced steel blade standard issue to city guards.',
+        desc: '城市巡逻卫队标准配发的精钢长剑，锋利耐用。',
         storyTags: ['weapon'],
       },
       facets: {
@@ -169,7 +169,7 @@ export const sampleProjectData: ProjectData = {
   globals: [
     {
       key: 'rpg.gold',
-      name: 'Gold Currency',
+      name: '金币储备',
       type: 'number',
       default: 150,
       hidden: false,
@@ -178,7 +178,7 @@ export const sampleProjectData: ProjectData = {
     },
     {
       key: 'plot.suspicion',
-      name: 'Suspect Guilt Meter',
+      name: '嫌疑人罪证量表',
       type: 'number',
       default: 0,
       hidden: true,
@@ -194,22 +194,22 @@ export const sampleProjectData: ProjectData = {
   achievements: {
     ach_prologue: {
       id: 'ach_prologue',
-      name: 'A Rain of Mysteries',
-      desc: 'Begin your investigation in Easy Story Engine.',
+      name: '暴雨中的迷局',
+      desc: '在 Easy Story Engine 中开启您的初次调查旅程。',
       secret: false,
       trigger: { switches: [{ key: 'game_started', value: true }] },
     },
     ach_first_contradiction: {
       id: 'ach_first_contradiction',
-      name: 'Truth Unveiled (异议あり!)',
-      desc: 'Point out the critical contradiction in Mr. Vance testimony.',
+      name: '真相大白 (异议あり!)',
+      desc: '在法庭辩论中成功指出凡斯先生证言的致命矛盾。',
       secret: false,
       trigger: { switches: [{ key: 'debate_cleared', value: true }] },
     },
     ach_rpg_battle: {
       id: 'ach_rpg_battle',
-      name: 'Town Square Protector',
-      desc: 'Defeat the ambush creature in RPG mode.',
+      name: '城镇广场守护者',
+      desc: '在 RPG 模式下击退伏击的暗影魔物。',
       secret: false,
       trigger: { switches: [{ key: 'battle_won', value: true }] },
     },
@@ -225,16 +225,16 @@ export const sampleProjectData: ProjectData = {
           id: 'msg_1',
           senderId: 'assistant',
           type: 'text',
-          content: 'Ren! I brewed some \\C[#64b5f6]Herbal Tea\\C[#ffffff] for you. Also, be sure to check the alleyway!',
+          content: '任侦探！我刚泡好了 \\C[#64b5f6]舒缓草药茶\\C[#ffffff]！记得去后巷看看有没有可疑遗留物哦！',
           replies: [
             {
               id: 'rep_1',
-              text: 'Thanks Maya! You are the best.',
+              text: '谢谢真宵！有你在真是太靠谱了。',
               affectionDelta: { characterId: 'assistant', delta: 10 },
             },
             {
               id: 'rep_2',
-              text: 'Let us stay focused on the case.',
+              text: '收到，我们抓紧调查线索。',
             },
           ],
         },
@@ -245,12 +245,12 @@ export const sampleProjectData: ProjectData = {
     ch1: {
       id: 'ch1',
       chapter: '1',
-      title: 'Chapter 1: The Midnight Rain',
+      title: '第一章：午夜暴雨中的疑云',
       startNodeId: 'prologue',
       nodes: {
         prologue: {
           id: 'prologue',
-          title: 'Detective Office',
+          title: '侦探事务所',
           type: 'event',
           position: { x: 50, y: 150 },
           data: {
@@ -275,18 +275,18 @@ export const sampleProjectData: ProjectData = {
                 code: 'show_text',
                 parameters: {
                   characterId: 'assistant',
-                  characterName: 'Maya',
-                  text: 'Detective \\N[detective]! The suspect Mr. Vance insists he stayed inside the cafe and never stepped out in the storm!',
+                  characterName: '真宵',
+                  text: '\\N[detective]！嫌疑人凡斯先生坚称昨晚一直坐在温暖的咖啡馆里避雨，绝对没有踏入暴风雨中半步！',
                   emotion: 'normal',
                 },
               },
               {
                 code: 'show_choices',
                 parameters: {
-                  prompt: 'How would you like to proceed?',
+                  prompt: '任侦探，我们接下来怎么行动？',
                   choices: [
                     {
-                      label: '1. Investigate the Crime Scene in RPG Mode',
+                      label: '1. 前往小镇街区进行 RPG 现场搜查 (切换 RPG 模式)',
                       commands: [
                         {
                           code: 'switch_mode',
@@ -295,7 +295,7 @@ export const sampleProjectData: ProjectData = {
                       ],
                     },
                     {
-                      label: '2. Confront Mr. Vance in Courtroom Debate',
+                      label: '2. 直接对凡斯先生进行法庭质询 (切换辩论模式)',
                       commands: [
                         {
                           code: 'switch_mode',
@@ -315,7 +315,7 @@ export const sampleProjectData: ProjectData = {
   commonEvents: {
     debate_victory: {
       id: 'debate_victory',
-      name: 'Debate Victory Event',
+      name: '辩论胜利事件',
       commands: [
         {
           code: 'control_switches',
@@ -329,8 +329,8 @@ export const sampleProjectData: ProjectData = {
           code: 'show_text',
           parameters: {
             characterId: 'suspect',
-            characterName: 'Mr. Vance',
-            text: 'I... I confess! I took the umbrella because it was pouring rain outside! You broke my alibi completely!',
+            characterName: '凡斯先生',
+            text: '我……我招认！因为昨晚外面暴雨如注，我顺手牵羊拿走了那把伞！我的不在场证明被你彻底击碎了！',
             emotion: 'sorrow',
           },
         },
@@ -338,8 +338,8 @@ export const sampleProjectData: ProjectData = {
           code: 'show_text',
           parameters: {
             characterId: 'assistant',
-            characterName: 'Maya',
-            text: 'We did it! Case closed! Easy Story Engine handled the multi-mode transition smoothly!',
+            characterName: '真宵',
+            text: '太棒了任侦探！真相大白！Easy Story Engine 完美实现了多模式之间的丝滑串联！',
             emotion: 'joy',
           },
         },
@@ -349,7 +349,7 @@ export const sampleProjectData: ProjectData = {
   maps: {
     town_square: {
       id: 'town_square',
-      name: 'Old Town Square',
+      name: '旧镇中心广场',
       width: 16,
       height: 12,
       tileSize: 32,
@@ -359,7 +359,7 @@ export const sampleProjectData: ProjectData = {
       events: [
         {
           id: 'guard_npc',
-          name: 'Captain Drake',
+          name: '德雷克警长',
           x: 4,
           y: 4,
           pages: [
@@ -371,8 +371,8 @@ export const sampleProjectData: ProjectData = {
                   code: 'show_text',
                   parameters: {
                     characterId: 'guard',
-                    characterName: 'Captain Drake',
-                    text: 'Detective! Take this forged steel sword before you enter the forest alley.',
+                    characterName: '德雷克警长',
+                    text: '任侦探！在去幽暗小巷调查前，带上这把城镇巡逻队的精钢佩剑防身吧。',
                   },
                 },
                 {
@@ -385,7 +385,7 @@ export const sampleProjectData: ProjectData = {
         },
         {
           id: 'alley_exit',
-          name: 'To Courtroom',
+          name: '前往法庭',
           x: 10,
           y: 8,
           pages: [
@@ -396,7 +396,7 @@ export const sampleProjectData: ProjectData = {
                 {
                   code: 'show_text',
                   parameters: {
-                    text: 'Evidence collected. Proceeding to courtroom cross-examination!',
+                    text: '关键证物搜集完毕，即刻动身前往法庭对嫌疑人开展交叉质询！',
                   },
                 },
                 {
@@ -413,7 +413,7 @@ export const sampleProjectData: ProjectData = {
   debates: {
     trial_stolen_umbrella: {
       id: 'trial_stolen_umbrella',
-      title: 'Testimony: Whereabouts During the Storm',
+      title: '法庭证言：暴风雨当夜的行踪',
       witnessId: 'suspect',
       penalty: 25,
       maxPressure: 100,
@@ -421,41 +421,41 @@ export const sampleProjectData: ProjectData = {
         {
           id: 's1',
           speakerId: 'suspect',
-          text: 'I stayed inside the warmth of the coffee shop from 8 PM until 10 PM sharp.',
-          pressResponseText: 'Are you sure about the timing? Yes, the grandfather clock was right above my seat.',
+          text: '昨天晚上八点到十点，我一直老老实实坐在温暖的咖啡馆里。',
+          pressResponseText: '你确定时间没有记错吗？当然，咖啡馆那个大挂钟就在我头顶上方！',
         },
         {
           id: 's2',
           speakerId: 'suspect',
-          text: 'The weather was completely pleasant and dry when I strolled back home.',
-          pressResponseText: 'I wore my lightest clothes; there was no rain whatsoever.',
+          text: '我散步回公寓的时候，外面天气非常惬意干燥，地面连一滴水都没有。',
+          pressResponseText: '我出门时穿的是最轻便的布鞋，要是下雨早就湿透了！',
         },
         {
           id: 's3',
           speakerId: 'suspect',
-          text: 'I never touched or carried an umbrella throughout the whole evening!',
+          text: '我整个晚上都绝对没有带过雨伞，更没碰过雨伞！',
           contradictionEvidenceId: 'wet_umbrella',
-          pressResponseText: 'Why would anyone carry an umbrella on a dry night?',
+          pressResponseText: '既然外面滴雨未落，我带雨伞干什么？根本用不着！',
           breakthroughStoryLabel: 'debate_victory',
         },
         {
           id: 's4',
           speakerId: 'suspect',
-          text: 'After that, I rode my bicycle peacefully back to my flat.',
-          pressResponseText: 'My bicycle is stored safely in my apartment lobby.',
+          text: '在那之后，我就骑着心爱的自行车平平安安回到了家。',
+          pressResponseText: '我的自行车现在还安全地停在公寓门厅里。',
         },
       ],
       onVictoryEvent: 'debate_victory',
     },
   },
   title: {
-    titleText: 'The Case of the Midnight Rain',
+    titleText: '午夜之雨案',
     bgmTrack: 'title_theme',
     buttons: [
-      { id: 'btn_new', label: 'Start New Game', action: 'new_game' },
-      { id: 'btn_cont', label: 'Continue Journey', action: 'continue' },
-      { id: 'btn_ach', label: 'Hall of Achievements', action: 'achievements' },
-      { id: 'btn_gal', label: 'CG Gallery', action: 'gallery' },
+      { id: 'btn_new', label: '开始新游戏', action: 'new_game' },
+      { id: 'btn_cont', label: '继续探案旅程', action: 'continue' },
+      { id: 'btn_ach', label: '成就殿堂', action: 'achievements' },
+      { id: 'btn_gal', label: 'CG 图库', action: 'gallery' },
     ],
   },
   assets: {},

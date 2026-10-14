@@ -44,7 +44,7 @@ export class TilemapEditor {
     `;
 
     const drawBtn = document.createElement('button');
-    drawBtn.innerText = '🎨 Ground Tiles';
+    drawBtn.innerText = '🎨 地面瓦片绘制';
     drawBtn.style.cssText = btnStyle(this.currentTool === 'draw');
     drawBtn.onclick = () => {
       this.currentTool = 'draw';
@@ -52,7 +52,7 @@ export class TilemapEditor {
     };
 
     const colBtn = document.createElement('button');
-    colBtn.innerText = '⛔ Collision (碰撞层)';
+    colBtn.innerText = '⛔ 碰撞阻挡层';
     colBtn.style.cssText = btnStyle(this.currentTool === 'collision');
     colBtn.onclick = () => {
       this.currentTool = 'collision';
@@ -60,7 +60,7 @@ export class TilemapEditor {
     };
 
     const regBtn = document.createElement('button');
-    regBtn.innerText = '🏷️ Region (区域层)';
+    regBtn.innerText = '🏷️ 区域标记层';
     regBtn.style.cssText = btnStyle(this.currentTool === 'region');
     regBtn.onclick = () => {
       this.currentTool = 'region';
@@ -68,7 +68,7 @@ export class TilemapEditor {
     };
 
     const evBtn = document.createElement('button');
-    evBtn.innerText = '⚡ Place Event (事件)';
+    evBtn.innerText = '⚡ 放置地图事件';
     evBtn.style.cssText = btnStyle(this.currentTool === 'event');
     evBtn.onclick = () => {
       this.currentTool = 'event';

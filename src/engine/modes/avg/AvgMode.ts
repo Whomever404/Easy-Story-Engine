@@ -187,7 +187,7 @@ export class AvgMode implements GameModeModule {
     `;
 
     const autoBtn = document.createElement('button');
-    autoBtn.innerText = 'AUTO';
+    autoBtn.innerText = '自动播放';
     autoBtn.style.cssText = btnStyle;
     autoBtn.onclick = (e) => {
       e.stopPropagation();
@@ -197,7 +197,7 @@ export class AvgMode implements GameModeModule {
     };
 
     const skipBtn = document.createElement('button');
-    skipBtn.innerText = 'SKIP';
+    skipBtn.innerText = '快进跳过';
     skipBtn.style.cssText = btnStyle;
     skipBtn.onclick = (e) => {
       e.stopPropagation();
@@ -206,7 +206,7 @@ export class AvgMode implements GameModeModule {
     };
 
     const logBtn = document.createElement('button');
-    logBtn.innerText = 'LOG';
+    logBtn.innerText = '历史回看';
     logBtn.style.cssText = btnStyle;
     logBtn.onclick = (e) => {
       e.stopPropagation();
@@ -214,7 +214,7 @@ export class AvgMode implements GameModeModule {
     };
 
     const bagBtn = document.createElement('button');
-    bagBtn.innerText = 'ITEMS';
+    bagBtn.innerText = '随身背包';
     bagBtn.style.cssText = btnStyle;
     bagBtn.onclick = (e) => {
       e.stopPropagation();
@@ -222,7 +222,7 @@ export class AvgMode implements GameModeModule {
     };
 
     const presentBtn = document.createElement('button');
-    presentBtn.innerText = 'PRESENT';
+    presentBtn.innerText = '出示证物';
     presentBtn.style.cssText = btnStyle + 'background: #d32f2f; color: #fff; border-color: #f44336; font-weight: bold;';
     presentBtn.onclick = (e) => {
       e.stopPropagation();
@@ -505,17 +505,17 @@ export class AvgMode implements GameModeModule {
   // -------------------------------------------------------------
 
   private showBacklogModal(): void {
-    this.createModal('Dialogue Backlog (History)', (body) => {
+    this.createModal('剧情台词历史回看 (Backlog)', (body) => {
       const scroll = document.createElement('div');
       scroll.style.cssText = 'max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-right: 8px;';
       if (this.backlog.length === 0) {
-        scroll.innerHTML = '<div style="color: #999;">No previous dialogues.</div>';
+        scroll.innerHTML = '<div style="color: #999;">暂无历史台词记录。</div>';
       } else {
         this.backlog.forEach((item) => {
           const entry = document.createElement('div');
           entry.style.cssText = 'padding: 8px 12px; background: rgba(255,255,255,0.05); border-radius: 6px;';
           entry.innerHTML = `
-            <div style="font-weight: bold; color: #64b5f6; margin-bottom: 4px;">${item.speaker || 'Narrator'}</div>
+            <div style="font-weight: bold; color: #64b5f6; margin-bottom: 4px;">${item.speaker || '旁白'}</div>
             <div style="color: #eee; font-size: 14px;">${item.text}</div>
           `;
           scroll.appendChild(entry);
@@ -529,28 +529,29 @@ export class AvgMode implements GameModeModule {
     if (!this.ctx) return;
     const items = this.ctx.shell.state.items.avg;
 
-    this.createModal('AVG Inventory (Items & Evidence)', (body) => {
+    this.createModal('AVG 背包（物品与证物）', (body) => {
       const list = document.createElement('div');
       list.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; max-height: 380px; overflow-y: auto;';
 
       if (items.length === 0) {
-        list.innerHTML = '<div style="color: #999; grid-column: 1/-1;">Bag is empty.</div>';
+        list.innerHTML = '<div style="color: #999; grid-column: 1/-1;">背包空空如也。</div>';
       } else {
         items.forEach((item) => {
           const entity = this.ctx?.shell.getEntity(item.id);
           const facet = entity?.facets?.avg;
+          const categoryZh = facet?.category === 'evidence' ? '证物' : facet?.category === 'gift' ? '礼物' : '物品';
           const card = document.createElement('div');
           card.style.cssText = 'padding: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px;';
           card.innerHTML = `
-            <div style="font-weight: bold; color: #ffb74d;">${entity?.base?.name || item.id} (x${item.count})</div>
-            <div style="font-size: 12px; color: #90caf9; margin: 4px 0;">[${facet?.category?.toUpperCase() || item.category?.toUpperCase()}]</div>
+            <div style="font-weight: bold; color: #ffb74d;">${entity?.base?.name || item.id} (数量: ${item.count})</div>
+            <div style="font-size: 12px; color: #90caf9; margin: 4px 0;">[${categoryZh}]</div>
             <div style="font-size: 13px; color: #ccc; margin-bottom: 8px;">${entity?.base?.desc || ''}</div>
           `;
 
           // If it's a gift and can be gifted
           if (facet?.category === 'gift') {
             const giftBtn = document.createElement('button');
-            giftBtn.innerText = 'Give as Gift';
+            giftBtn.innerText = '赠送礼物 (+好感度)';
             giftBtn.style.cssText = 'padding: 4px 8px; font-size: 12px; background: #4caf50; border: none; border-radius: 4px; color: #fff; cursor: pointer;';
             giftBtn.onclick = () => {
               this.itemAdapter.useEffect?.(item.id, facet, this.ctx!);
@@ -570,28 +571,29 @@ export class AvgMode implements GameModeModule {
     if (!this.ctx) return;
     const items = this.ctx.shell.state.items.avg.filter((it) => it.count > 0);
 
-    this.createModal('Present Item / Evidence (出示证物)', (body) => {
+    this.createModal('出示物品与证物 (出示)', (body) => {
       const hint = document.createElement('div');
       hint.style.cssText = 'color: #ff9800; font-size: 13px; margin-bottom: 12px;';
-      hint.innerText = `Presenting to: ${this.currentSpeakerName || 'Current Target'}. Select evidence to reveal truth or advance plot!`;
+      hint.innerText = `正在向: ${this.currentSpeakerName || '当前对象'} 出示证物。选择正确的证物以推动剧情发展！`;
       body.appendChild(hint);
 
       const list = document.createElement('div');
       list.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; max-height: 350px; overflow-y: auto;';
 
       if (items.length === 0) {
-        list.innerHTML = '<div style="color: #999; grid-column: 1/-1;">No items or evidence in bag to present.</div>';
+        list.innerHTML = '<div style="color: #999; grid-column: 1/-1;">背包中暂无可出示的证物。</div>';
       } else {
         items.forEach((item) => {
           const entity = this.ctx?.shell.getEntity(item.id);
           const facet: AvgItemFacet | undefined = entity?.facets?.avg;
+          const categoryZh = facet?.category === 'evidence' ? '证物' : facet?.category === 'gift' ? '礼物' : '物品';
           const card = document.createElement('div');
           card.style.cssText = 'padding: 10px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; cursor: pointer; transition: 0.2s;';
           card.onmouseenter = () => (card.style.borderColor = '#f44336');
           card.onmouseleave = () => (card.style.borderColor = 'rgba(255,255,255,0.2)');
           card.innerHTML = `
             <div style="font-weight: bold; color: #ffca28;">${entity?.base?.name || item.id}</div>
-            <div style="font-size: 11px; color: #81d4fa;">${facet?.category || item.category}</div>
+            <div style="font-size: 11px; color: #81d4fa;">[${categoryZh}]</div>
             <div style="font-size: 12px; color: #ddd; margin-top: 4px;">${entity?.base?.desc || ''}</div>
           `;
 

@@ -1,6 +1,6 @@
 {
   "id": "debate_victory",
-  "name": "Debate Victory Event",
+  "name": "辩论胜利事件",
   "commands": [
     {
       "code": "control_switches",
@@ -19,8 +19,8 @@
       "code": "show_text",
       "parameters": {
         "characterId": "suspect",
-        "characterName": "Mr. Vance",
-        "text": "I... I confess! I took the umbrella because it was pouring rain outside! You broke my alibi completely!",
+        "characterName": "凡斯先生",
+        "text": "我……我招认！因为昨晚外面暴雨如注，我顺手牵羊拿走了那把伞！我的不在场证明被你彻底击碎了！",
         "emotion": "sorrow"
       }
     },
@@ -28,8 +28,8 @@
       "code": "show_text",
       "parameters": {
         "characterId": "assistant",
-        "characterName": "Maya",
-        "text": "We did it! Case closed! Easy Story Engine handled the multi-mode transition smoothly!",
+        "characterName": "真宵",
+        "text": "太棒了任侦探！真相大白！Easy Story Engine 完美实现了多模式之间的丝滑串联！",
         "emotion": "joy"
       }
     }

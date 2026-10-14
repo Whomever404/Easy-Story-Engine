@@ -2,9 +2,9 @@
   "wet_umbrella": {
     "id": "wet_umbrella",
     "base": {
-      "name": "Dripping Umbrella",
+      "name": "湿漉漉的雨伞",
       "icon": "umbrella.png",
-      "desc": "A soaked umbrella recovered from the coffee shop alleyway.",
+      "desc": "在咖啡馆后巷发现的一把浸满雨水的蓝色雨伞。",
       "storyTags": [
         "evidence",
         "rain"
@@ -18,7 +18,7 @@
         ],
         "presentReactions": {
           "suspect": {
-            "text": "H-Hey! Where did you dig up that drenched umbrella?!"
+            "text": "这……这把还在滴水的雨伞，你从哪翻出来的？！"
           }
         }
       },
@@ -32,16 +32,16 @@
         "contradictionIds": [
           "s3"
         ],
-        "pressResponse": "Look closely! The umbrella is still dripping wet with rainwater!"
+        "pressResponse": "仔细看！这把伞上还滴着新鲜的暴雨雨水！"
       }
     }
   },
   "herbal_tea": {
     "id": "herbal_tea",
     "base": {
-      "name": "Soothing Herbal Tea",
+      "name": "舒缓草药茶",
       "icon": "tea.png",
-      "desc": "Warm chamomile tea that lifts the spirits.",
+      "desc": "温热清香的洋甘菊茶，能有效舒缓疲劳与情绪。",
       "storyTags": [
         "gift",
         "drink"
@@ -64,9 +64,9 @@
   "iron_sword": {
     "id": "iron_sword",
     "base": {
-      "name": "Town Guard Sword",
+      "name": "城镇警卫佩剑",
       "icon": "sword.png",
-      "desc": "A well-balanced steel blade standard issue to city guards.",
+      "desc": "城市巡逻卫队标准配发的精钢长剑，锋利耐用。",
       "storyTags": [
         "weapon"
       ]

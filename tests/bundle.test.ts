@@ -19,8 +19,8 @@ describe('Bundle.js & index.html execution for file:// protocol', () => {
     expect(app).not.toBeNull();
     // Verify WebEditor was mounted
     expect(app!.innerHTML).toContain('ese-web-editor-app');
-    expect(app!.textContent).toContain('EASY STORY ENGINE');
-    expect(app!.textContent).toContain('Flowchart');
-    expect(app!.textContent).toContain('Playtest');
+    expect(app!.textContent).toContain('故事引擎');
+    expect(app!.textContent).toContain('流程图');
+    expect(app!.textContent).toContain('试玩');
   });
 });

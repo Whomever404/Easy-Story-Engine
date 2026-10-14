@@ -105,9 +105,9 @@ describe('Editor Views', () => {
     const container = document.createElement('div');
     const editor = new WebEditor(container, sampleProject);
 
-    expect(container.textContent).toContain('EASY STORY ENGINE');
-    expect(container.textContent).toContain('Flowchart');
-    expect(container.textContent).toContain('Mindmap');
-    expect(container.textContent).toContain('Playtest');
+    expect(container.textContent).toContain('故事引擎');
+    expect(container.textContent).toContain('流程图');
+    expect(container.textContent).toContain('思维导图');
+    expect(container.textContent).toContain('试玩');
   });
 });

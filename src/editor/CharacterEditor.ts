@@ -34,16 +34,16 @@ export class CharacterEditor {
 
     const sideHeader = document.createElement('div');
     sideHeader.style.cssText = 'padding: 12px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1);';
-    sideHeader.innerHTML = '<span style="font-weight: bold; font-size: 13px;">Characters</span>';
+    sideHeader.innerHTML = '<span style="font-weight: bold; font-size: 13px;">角色列表</span>';
 
     const addBtn = document.createElement('button');
-    addBtn.innerText = '+ New';
+    addBtn.innerText = '+ 新建角色';
     addBtn.style.cssText = 'background: #1976d2; border: none; border-radius: 4px; color: #fff; padding: 4px 8px; font-size: 11px; cursor: pointer;';
     addBtn.onclick = () => {
       const newId = `char_${Date.now()}`;
       this.characters[newId] = {
         id: newId,
-        name: 'New Character',
+        name: '新角色',
         initialAffection: 0,
         sprites: {
           portrait: { normal: 'normal.png', joy: 'joy.png', anger: 'anger.png', sorrow: 'sorrow.png' },
@@ -67,7 +67,7 @@ export class CharacterEditor {
       `;
       item.innerHTML = `
         <div style="font-weight: bold; font-size: 14px;">${char.name}</div>
-        <div style="font-size: 11px; color: #aaa;">ID: ${char.id}</div>
+        <div style="font-size: 11px; color: #aaa;">标识: ${char.id}</div>
       `;
       item.onclick = () => {
         this.selectedId = id;
@@ -83,7 +83,7 @@ export class CharacterEditor {
     main.style.cssText = 'flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px;';
 
     if (!this.selectedId || !this.characters[this.selectedId]) {
-      main.innerHTML = '<div style="color: #888;">Select or create a character to edit.</div>';
+      main.innerHTML = '<div style="color: #888;">请在左侧选择或新建一个角色。</div>';
     } else {
       const char = this.characters[this.selectedId];
       const errors = ProjectValidator.validateCharacterEmotions(char);
@@ -93,7 +93,7 @@ export class CharacterEditor {
         const errorBox = document.createElement('div');
         errorBox.style.cssText = 'background: rgba(244, 67, 54, 0.15); border: 1px solid #f44336; border-radius: 8px; padding: 12px; color: #ff8a80; font-size: 13px;';
         errorBox.innerHTML = `
-          <div style="font-weight: bold; margin-bottom: 4px;">⚠️ Emotion Constraint Warning (§4.12 强制表情集约束):</div>
+          <div style="font-weight: bold; margin-bottom: 4px;">⚠️ 基础表情缺失警告（§4.12 强制基础表情集约束）:</div>
           ${errors.map((e) => `<div>• ${e.message}</div>`).join('')}
         `;
         main.appendChild(errorBox);
@@ -103,33 +103,33 @@ export class CharacterEditor {
       main.innerHTML += `
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
           <div>
-            <label style="font-size: 12px; color: #aaa;">Name</label>
+            <label style="font-size: 12px; color: #aaa;">角色姓名</label>
             <input id="input-name" type="text" value="${char.name}" style="width: 100%; padding: 8px; background: #1c2237; border: 1px solid #3d496e; border-radius: 6px; color: #fff; margin-top: 4px;">
           </div>
           <div>
-            <label style="font-size: 12px; color: #aaa;">Initial Affection (好感度)</label>
+            <label style="font-size: 12px; color: #aaa;">初始好感度数值</label>
             <input id="input-aff" type="number" value="${char.initialAffection ?? 0}" style="width: 100%; padding: 8px; background: #1c2237; border: 1px solid #3d496e; border-radius: 6px; color: #fff; margin-top: 4px;">
           </div>
         </div>
 
         <div style="margin-top: 10px;">
-          <h4 style="margin: 0 0 10px 0; color: #64b5f6;">Base Emotion Slots (强制喜怒哀乐四表情槽位 §4.12)</h4>
+          <h4 style="margin: 0 0 10px 0; color: #64b5f6;">基础表情槽位（喜怒哀乐四表情必须完整配置 §4.12）</h4>
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
             <div style="background: #1c2237; padding: 10px; border-radius: 6px; border: 1px solid #3d496e;">
-              <div style="font-weight: bold; color: #81c784; font-size: 12px;">Normal (平)</div>
-              <input id="slot-normal" type="text" value="${char.sprites?.portrait?.normal || ''}" placeholder="asset id" style="width: 100%; padding: 6px; background: #111422; border: 1px solid #2d3753; border-radius: 4px; color: #fff; margin-top: 4px; font-size: 12px;">
+              <div style="font-weight: bold; color: #81c784; font-size: 12px;">常态 / 平 (Normal)</div>
+              <input id="slot-normal" type="text" value="${char.sprites?.portrait?.normal || ''}" placeholder="素材ID或路径" style="width: 100%; padding: 6px; background: #111422; border: 1px solid #2d3753; border-radius: 4px; color: #fff; margin-top: 4px; font-size: 12px;">
             </div>
             <div style="background: #1c2237; padding: 10px; border-radius: 6px; border: 1px solid #3d496e;">
-              <div style="font-weight: bold; color: #ffd54f; font-size: 12px;">Joy (喜)</div>
-              <input id="slot-joy" type="text" value="${char.sprites?.portrait?.joy || ''}" placeholder="asset id" style="width: 100%; padding: 6px; background: #111422; border: 1px solid #2d3753; border-radius: 4px; color: #fff; margin-top: 4px; font-size: 12px;">
+              <div style="font-weight: bold; color: #ffd54f; font-size: 12px;">喜悦 / 喜 (Joy)</div>
+              <input id="slot-joy" type="text" value="${char.sprites?.portrait?.joy || ''}" placeholder="素材ID或路径" style="width: 100%; padding: 6px; background: #111422; border: 1px solid #2d3753; border-radius: 4px; color: #fff; margin-top: 4px; font-size: 12px;">
             </div>
             <div style="background: #1c2237; padding: 10px; border-radius: 6px; border: 1px solid #3d496e;">
-              <div style="font-weight: bold; color: #e57373; font-size: 12px;">Anger (怒)</div>
-              <input id="slot-anger" type="text" value="${char.sprites?.portrait?.anger || ''}" placeholder="asset id" style="width: 100%; padding: 6px; background: #111422; border: 1px solid #2d3753; border-radius: 4px; color: #fff; margin-top: 4px; font-size: 12px;">
+              <div style="font-weight: bold; color: #e57373; font-size: 12px;">愤怒 / 怒 (Anger)</div>
+              <input id="slot-anger" type="text" value="${char.sprites?.portrait?.anger || ''}" placeholder="素材ID或路径" style="width: 100%; padding: 6px; background: #111422; border: 1px solid #2d3753; border-radius: 4px; color: #fff; margin-top: 4px; font-size: 12px;">
             </div>
             <div style="background: #1c2237; padding: 10px; border-radius: 6px; border: 1px solid #3d496e;">
-              <div style="font-weight: bold; color: #64b5f6; font-size: 12px;">Sorrow (哀)</div>
-              <input id="slot-sorrow" type="text" value="${char.sprites?.portrait?.sorrow || ''}" placeholder="asset id" style="width: 100%; padding: 6px; background: #111422; border: 1px solid #2d3753; border-radius: 4px; color: #fff; margin-top: 4px; font-size: 12px;">
+              <div style="font-weight: bold; color: #64b5f6; font-size: 12px;">悲哀 / 哀 (Sorrow)</div>
+              <input id="slot-sorrow" type="text" value="${char.sprites?.portrait?.sorrow || ''}" placeholder="素材ID或路径" style="width: 100%; padding: 6px; background: #111422; border: 1px solid #2d3753; border-radius: 4px; color: #fff; margin-top: 4px; font-size: 12px;">
             </div>
           </div>
         </div>

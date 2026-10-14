@@ -1,6 +1,6 @@
 {
   "id": "town_square",
-  "name": "Old Town Square",
+  "name": "旧镇中心广场",
   "width": 16,
   "height": 12,
   "tileSize": 32,
@@ -589,7 +589,7 @@
   "events": [
     {
       "id": "guard_npc",
-      "name": "Captain Drake",
+      "name": "德雷克警长",
       "x": 4,
       "y": 4,
       "pages": [
@@ -601,8 +601,8 @@
               "code": "show_text",
               "parameters": {
                 "characterId": "guard",
-                "characterName": "Captain Drake",
-                "text": "Detective! Take this forged steel sword before you enter the forest alley."
+                "characterName": "德雷克警长",
+                "text": "任侦探！在去幽暗小巷调查前，带上这把城镇巡逻队的精钢佩剑防身吧。"
               }
             },
             {
@@ -619,7 +619,7 @@
     },
     {
       "id": "alley_exit",
-      "name": "To Courtroom",
+      "name": "前往法庭",
       "x": 10,
       "y": 8,
       "pages": [
@@ -630,7 +630,7 @@
             {
               "code": "show_text",
               "parameters": {
-                "text": "Evidence collected. Proceeding to courtroom cross-examination!"
+                "text": "关键证物搜集完毕，即刻动身前往法庭对嫌疑人开展交叉质询！"
               }
             },
             {

@@ -1,6 +1,6 @@
 {
   "id": "trial_stolen_umbrella",
-  "title": "Testimony: Whereabouts During the Storm",
+  "title": "法庭证言：暴风雨当夜的行踪",
   "witnessId": "suspect",
   "penalty": 25,
   "maxPressure": 100,
@@ -8,28 +8,28 @@
     {
       "id": "s1",
       "speakerId": "suspect",
-      "text": "I stayed inside the warmth of the coffee shop from 8 PM until 10 PM sharp.",
-      "pressResponseText": "Are you sure about the timing? Yes, the grandfather clock was right above my seat."
+      "text": "昨天晚上八点到十点，我一直老老实实坐在温暖的咖啡馆里。",
+      "pressResponseText": "你确定时间没有记错吗？当然，咖啡馆那个大挂钟就在我头顶上方！"
     },
     {
       "id": "s2",
       "speakerId": "suspect",
-      "text": "The weather was completely pleasant and dry when I strolled back home.",
-      "pressResponseText": "I wore my lightest clothes; there was no rain whatsoever."
+      "text": "我散步回公寓的时候，外面天气非常惬意干燥，地面连一滴水都没有。",
+      "pressResponseText": "我出门时穿的是最轻便的布鞋，要是下雨早就湿透了！"
     },
     {
       "id": "s3",
       "speakerId": "suspect",
-      "text": "I never touched or carried an umbrella throughout the whole evening!",
+      "text": "我整个晚上都绝对没有带过雨伞，更没碰过雨伞！",
       "contradictionEvidenceId": "wet_umbrella",
-      "pressResponseText": "Why would anyone carry an umbrella on a dry night?",
+      "pressResponseText": "既然外面滴雨未落，我带雨伞干什么？根本用不着！",
       "breakthroughStoryLabel": "debate_victory"
     },
     {
       "id": "s4",
       "speakerId": "suspect",
-      "text": "After that, I rode my bicycle peacefully back to my flat.",
-      "pressResponseText": "My bicycle is stored safely in my apartment lobby."
+      "text": "在那之后，我就骑着心爱的自行车平平安安回到了家。",
+      "pressResponseText": "我的自行车现在还安全地停在公寓门厅里。"
     }
   ],
   "onVictoryEvent": "debate_victory"

@@ -1,12 +1,12 @@
 {
   "id": "ch1",
   "chapter": "1",
-  "title": "Chapter 1: The Midnight Rain",
+  "title": "第一章：午夜暴雨中的疑云",
   "startNodeId": "prologue",
   "nodes": {
     "prologue": {
       "id": "prologue",
-      "title": "Detective Office",
+      "title": "侦探事务所",
       "type": "event",
       "position": {
         "x": 50,
@@ -47,18 +47,18 @@
             "code": "show_text",
             "parameters": {
               "characterId": "assistant",
-              "characterName": "Maya",
-              "text": "Detective \\N[detective]! The suspect Mr. Vance insists he stayed inside the cafe and never stepped out in the storm!",
+              "characterName": "真宵",
+              "text": "\\N[detective]！嫌疑人凡斯先生坚称昨晚一直坐在温暖的咖啡馆里避雨，绝对没有踏入暴风雨中半步！",
               "emotion": "normal"
             }
           },
           {
             "code": "show_choices",
             "parameters": {
-              "prompt": "How would you like to proceed?",
+              "prompt": "任侦探，我们接下来怎么行动？",
               "choices": [
                 {
-                  "label": "1. Investigate the Crime Scene in RPG Mode",
+                  "label": "1. 前往小镇街区进行 RPG 现场搜查 (切换 RPG 模式)",
                   "commands": [
                     {
                       "code": "switch_mode",
@@ -72,7 +72,7 @@
                   ]
                 },
                 {
-                  "label": "2. Confront Mr. Vance in Courtroom Debate",
+                  "label": "2. 直接对凡斯先生进行法庭质询 (切换辩论模式)",
                   "commands": [
                     {
                       "code": "switch_mode",

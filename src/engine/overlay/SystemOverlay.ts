@@ -56,14 +56,14 @@ export class SystemOverlay {
   }
 
   private showSystemMenuModal(): void {
-    this.createModal('System Menu', (body) => {
+    this.createModal('系统菜单', (body) => {
       const list = document.createElement('div');
       list.style.cssText = 'display: flex; flex-direction: column; gap: 10px; width: 260px; margin: 0 auto;';
 
       const btnStyle = 'padding: 12px 18px; font-size: 15px; font-weight: 600; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: #22293d; color: #fff; cursor: pointer; transition: 0.2s;';
 
       const saveBtn = document.createElement('button');
-      saveBtn.innerText = '💾 Save Game (存档)';
+      saveBtn.innerText = '💾 保存进度 (存档)';
       saveBtn.style.cssText = btnStyle;
       saveBtn.onclick = () => {
         this.closeModal();
@@ -71,7 +71,7 @@ export class SystemOverlay {
       };
 
       const loadBtn = document.createElement('button');
-      loadBtn.innerText = '📂 Load Game (读档)';
+      loadBtn.innerText = '📂 读取进度 (读档)';
       loadBtn.style.cssText = btnStyle;
       loadBtn.onclick = () => {
         this.closeModal();
@@ -79,7 +79,7 @@ export class SystemOverlay {
       };
 
       const achBtn = document.createElement('button');
-      achBtn.innerText = '🏆 Achievements (成就)';
+      achBtn.innerText = '🏆 成就系统';
       achBtn.style.cssText = btnStyle;
       achBtn.onclick = () => {
         this.closeModal();
@@ -87,7 +87,7 @@ export class SystemOverlay {
       };
 
       const galleryBtn = document.createElement('button');
-      galleryBtn.innerText = '🖼️ Gallery (图库)';
+      galleryBtn.innerText = '🖼️ CG 回想图库';
       galleryBtn.style.cssText = btnStyle;
       galleryBtn.onclick = () => {
         this.closeModal();
@@ -95,7 +95,7 @@ export class SystemOverlay {
       };
 
       const settingsBtn = document.createElement('button');
-      settingsBtn.innerText = '🔊 Audio Settings (设置)';
+      settingsBtn.innerText = '🔊 声音与引擎设置';
       settingsBtn.style.cssText = btnStyle;
       settingsBtn.onclick = () => {
         this.closeModal();
@@ -135,19 +135,19 @@ export class SystemOverlay {
           const dateStr = new Date(item.timestamp).toLocaleString();
           card.innerHTML = `
             <div>
-              <div style="font-weight: bold; color: #64b5f6;">Slot ${slot}: ${item.chapterLabel || 'Adventure'}</div>
-              <div style="font-size: 12px; color: #aaa; margin-top: 4px;">Time: ${dateStr} | Mode: ${item.modeId.toUpperCase()}</div>
+              <div style="font-weight: bold; color: #64b5f6;">存档槽位 ${slot}: ${item.chapterLabel || '冒险章节'}</div>
+              <div style="font-size: 12px; color: #aaa; margin-top: 4px;">保存时间: ${dateStr} | 模式: ${item.modeId.toUpperCase()}</div>
             </div>
             <button style="background: ${mode === 'save' ? '#1976d2' : '#388e3c'}; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer;">
-              ${mode === 'save' ? 'Overwrite' : 'Load'}
+              ${mode === 'save' ? '覆盖存档' : '读取进度'}
             </button>
           `;
         } else {
           card.innerHTML = `
             <div>
-              <div style="font-weight: bold; color: #888;">Slot ${slot}: [Empty Slot]</div>
+              <div style="font-weight: bold; color: #888;">存档槽位 ${slot}: [空存档位]</div>
             </div>
-            ${mode === 'save' ? '<button style="background: #1976d2; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer;">Save</button>' : '<span style="color: #666; font-size: 13px;">No Data</span>'}
+            ${mode === 'save' ? '<button style="background: #1976d2; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer;">保存</button>' : '<span style="color: #666; font-size: 13px;">无数据</span>'}
           `;
         }
 
@@ -180,12 +180,12 @@ export class SystemOverlay {
     const allAchievements = Object.values(this.shell.projectData.achievements || {});
     const unlockedIds = this.shell.state.achievements;
 
-    this.createModal('Achievements (成就系统)', (body) => {
+    this.createModal('成就系统 (Achievements)', (body) => {
       const scroll = document.createElement('div');
       scroll.style.cssText = 'max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;';
 
       if (allAchievements.length === 0) {
-        scroll.innerHTML = '<div style="color: #888; text-align: center; padding: 20px;">No achievements configured in project.</div>';
+        scroll.innerHTML = '<div style="color: #888; text-align: center; padding: 20px;">工程中未配置任何成就项。</div>';
       } else {
         allAchievements.forEach((ach) => {
           const isUnlocked = unlockedIds.includes(ach.id);
@@ -202,9 +202,9 @@ export class SystemOverlay {
             <div style="font-size: 32px;">${isUnlocked ? '🏆' : isSecret ? '❓' : '🔒'}</div>
             <div style="flex: 1;">
               <div style="font-weight: bold; color: ${isUnlocked ? '#ffd54f' : '#ccc'};">${isSecret ? '???' : ach.name}</div>
-              <div style="font-size: 13px; color: #999; margin-top: 4px;">${isSecret ? 'Hidden Achievement' : ach.desc}</div>
+              <div style="font-size: 13px; color: #999; margin-top: 4px;">${isSecret ? '隐藏成就（达成特定剧情或条件后解锁）' : ach.desc}</div>
             </div>
-            ${isUnlocked ? '<span style="color: #4caf50; font-weight: bold; font-size: 12px;">UNLOCKED</span>' : ''}
+            ${isUnlocked ? '<span style="color: #4caf50; font-weight: bold; font-size: 12px;">已解锁</span>' : '<span style="color: #888; font-size: 12px;">未达成</span>'}
           `;
 
           scroll.appendChild(card);
@@ -222,12 +222,12 @@ export class SystemOverlay {
   public showGalleryModal(): void {
     const unlocked = this.shell.state.gallery;
 
-    this.createModal('Gallery (CG 图库)', (body) => {
+    this.createModal('CG 回想图库 (Gallery)', (body) => {
       const grid = document.createElement('div');
       grid.style.cssText = 'display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-height: 400px; overflow-y: auto;';
 
       if (unlocked.length === 0) {
-        grid.innerHTML = '<div style="grid-column: 1/-1; color: #888; text-align: center; padding: 20px;">No CGs unlocked yet. Unlock photos through phone messages and story milestones!</div>';
+        grid.innerHTML = '<div style="grid-column: 1/-1; color: #888; text-align: center; padding: 20px;">暂未解锁任何剧情 CG。通过短信照片分享与关键剧情推进即可收集图库！</div>';
       } else {
         unlocked.forEach((assetId) => {
           const card = document.createElement('div');
@@ -249,19 +249,19 @@ export class SystemOverlay {
   // -------------------------------------------------------------
 
   public showSettingsModal(): void {
-    this.createModal('Audio & Engine Settings (设置)', (body) => {
+    this.createModal('声音与引擎设置', (body) => {
       body.innerHTML = `
         <div style="display: flex; flex-direction: column; gap: 18px; width: 320px; margin: 0 auto;">
           <div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-              <span>BGM Volume</span>
+              <span>背景音乐音量 (BGM)</span>
               <span id="val-bgm">80%</span>
             </div>
             <input type="range" id="slider-bgm" min="0" max="100" value="80" style="width: 100%;">
           </div>
           <div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
-              <span>Sound Effects (SE)</span>
+              <span>操作与场景音效 (SE)</span>
               <span id="val-se">90%</span>
             </div>
             <input type="range" id="slider-se" min="0" max="100" value="90" style="width: 100%;">

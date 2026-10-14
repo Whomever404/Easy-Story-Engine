@@ -1,8 +1,8 @@
 {
   "detective": {
     "id": "detective",
-    "name": "Detective Ren",
-    "title": "Ace Investigator",
+    "name": "任侦探",
+    "title": "王牌调查员",
     "initialAffection": 0,
     "sprites": {
       "portrait": {
@@ -15,7 +15,7 @@
     "traits": [
       {
         "id": "observation",
-        "name": "Observation (观察力)",
+        "name": "敏锐观察力",
         "modeMapping": {
           "avg": {
             "presentHintLevel": 1
@@ -32,8 +32,8 @@
   },
   "assistant": {
     "id": "assistant",
-    "name": "Maya",
-    "title": "Spirit Medium Assistant",
+    "name": "真宵",
+    "title": "见习灵媒助手",
     "initialAffection": 25,
     "sprites": {
       "portrait": {
@@ -52,8 +52,8 @@
   },
   "suspect": {
     "id": "suspect",
-    "name": "Mr. Vance",
-    "title": "Antiques Dealer",
+    "name": "凡斯先生",
+    "title": "古董店商人",
     "sprites": {
       "portrait": {
         "normal": "assets/images/vance_norm.png",
@@ -65,7 +65,7 @@
   },
   "guard": {
     "id": "guard",
-    "name": "Officer Drake",
+    "name": "德雷克警长",
     "sprites": {
       "portrait": {
         "normal": "assets/images/drake_norm.png",

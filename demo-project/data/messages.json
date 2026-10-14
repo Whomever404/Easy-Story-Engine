@@ -16,11 +16,11 @@
         "id": "msg_1",
         "senderId": "assistant",
         "type": "text",
-        "content": "Ren! I brewed some \\C[#64b5f6]Herbal Tea\\C[#ffffff] for you. Also, be sure to check the alleyway!",
+        "content": "任侦探！我刚泡好了 \\C[#64b5f6]舒缓草药茶\\C[#ffffff]！记得去后巷看看有没有可疑遗留物哦！",
         "replies": [
           {
             "id": "rep_1",
-            "text": "Thanks Maya! You are the best.",
+            "text": "谢谢真宵！有你在真是太靠谱了。",
             "affectionDelta": {
               "characterId": "assistant",
               "delta": 10
@@ -28,7 +28,7 @@
           },
           {
             "id": "rep_2",
-            "text": "Let us stay focused on the case."
+            "text": "收到，我们抓紧调查线索。"
           }
         ]
       }

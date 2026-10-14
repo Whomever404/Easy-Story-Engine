@@ -73,19 +73,19 @@ export class WebEditor {
     // Brand and Title
     topBar.innerHTML = `
       <div style="display: flex; align-items: center; gap: 12px;">
-        <span style="font-weight: 900; font-size: 16px; color: #64b5f6; letter-spacing: 1px;">⚡ EASY STORY ENGINE</span>
+        <span style="font-weight: 900; font-size: 16px; color: #64b5f6; letter-spacing: 1px;">⚡ 故事引擎 (ESE)</span>
         <span style="font-size: 12px; background: #283593; padding: 2px 8px; border-radius: 4px; color: #bbdefb;" id="editor-proj-title">${this.projectData.manifest.name}</span>
       </div>
       <div id="editor-tabs-container" style="display: flex; gap: 4px;"></div>
       <div style="display: flex; gap: 8px;">
         <button id="btn-playtest" style="background: #2e7d32; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px;">
-          ▶ Playtest (试玩)
+          ▶ 试玩游戏
         </button>
         <button id="btn-export-esproj" style="background: #1565c0; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer;">
-          📦 Export .esproj
+          📦 导出工程包 (.esproj)
         </button>
         <button id="btn-export-html" style="background: #6a1b9a; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer;">
-          🌐 Export HTML5
+          🌐 导出网页版 (HTML5)
         </button>
       </div>
     `;
@@ -111,16 +111,16 @@ export class WebEditor {
     tabContainer.innerHTML = '';
 
     const tabs: { id: EditorViewTab; label: string }[] = [
-      { id: 'flowchart', label: '📊 Flowchart (流程图)' },
-      { id: 'mindmap', label: '🧠 Mindmap (导图)' },
-      { id: 'blocks', label: '🧱 Blocks (积木)' },
-      { id: 'tilemap', label: '🗺️ Map (瓦片地图)' },
-      { id: 'characters', label: '👥 Characters (角色)' },
-      { id: 'database', label: '🗄️ Database (数据库)' },
-      { id: 'messages', label: '💬 Messages (手机)' },
-      { id: 'debate', label: '⚖️ Debate (辩论)' },
-      { id: 'title', label: '🎨 Title (标题)' },
-      { id: 'plugins', label: '🔌 Plugins (插件)' },
+      { id: 'flowchart', label: '📊 流程图' },
+      { id: 'mindmap', label: '🧠 思维导图' },
+      { id: 'blocks', label: '🧱 指令积木' },
+      { id: 'tilemap', label: '🗺️ 瓦片地图' },
+      { id: 'characters', label: '👥 角色立绘' },
+      { id: 'database', label: '🗄️ 数据库属性' },
+      { id: 'messages', label: '💬 手机短信' },
+      { id: 'debate', label: '⚖️ 法庭辩论' },
+      { id: 'title', label: '🎨 标题画面' },
+      { id: 'plugins', label: '🔌 插件管理' },
     ];
 
     tabs.forEach((t) => {
@@ -275,26 +275,26 @@ export class WebEditor {
 
     inspector.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;">
-        <h4 style="margin: 0; color: #64b5f6;">Node Inspector</h4>
+        <h4 style="margin: 0; color: #64b5f6;">节点属性检查器</h4>
         <button id="close-inspector" style="background: none; border: none; color: #aaa; cursor: pointer;">✕</button>
       </div>
       <div>
-        <label style="font-size: 11px; color: #aaa;">Node ID</label>
+        <label style="font-size: 11px; color: #aaa;">节点 ID</label>
         <div style="font-family: monospace; font-size: 12px; color: #ffd54f;">${node.id}</div>
       </div>
       <div>
-        <label style="font-size: 11px; color: #aaa;">Title</label>
+        <label style="font-size: 11px; color: #aaa;">节点标题</label>
         <input id="node-title-inp" type="text" value="${node.title}" style="width: 100%; padding: 6px; background: #1f2538; border: 1px solid #3d496e; border-radius: 4px; color: #fff; margin-top: 2px;">
       </div>
       <div>
-        <label style="font-size: 11px; color: #aaa;">Type</label>
+        <label style="font-size: 11px; color: #aaa;">节点类型</label>
         <select id="node-type-sel" style="width: 100%; padding: 6px; background: #1f2538; border: 1px solid #3d496e; border-radius: 4px; color: #fff; margin-top: 2px;">
-          <option value="dialogue" ${node.type === 'dialogue' ? 'selected' : ''}>Dialogue</option>
-          <option value="event" ${node.type === 'event' ? 'selected' : ''}>Event Sequence</option>
-          <option value="choice" ${node.type === 'choice' ? 'selected' : ''}>Choices Branch</option>
-          <option value="switch_mode" ${node.type === 'switch_mode' ? 'selected' : ''}>Switch Game Mode (§6.2)</option>
-          <option value="battle" ${node.type === 'battle' ? 'selected' : ''}>RPG Battle</option>
-          <option value="debate" ${node.type === 'debate' ? 'selected' : ''}>Debate Trial</option>
+          <option value="dialogue" ${node.type === 'dialogue' ? 'selected' : ''}>对话剧情 (Dialogue)</option>
+          <option value="event" ${node.type === 'event' ? 'selected' : ''}>事件序列 (Event Sequence)</option>
+          <option value="choice" ${node.type === 'choice' ? 'selected' : ''}>分支选项 (Choice)</option>
+          <option value="switch_mode" ${node.type === 'switch_mode' ? 'selected' : ''}>切换游戏模式 (§6.2)</option>
+          <option value="battle" ${node.type === 'battle' ? 'selected' : ''}>RPG 回合战斗 (Battle)</option>
+          <option value="debate" ${node.type === 'debate' ? 'selected' : ''}>法庭辩论 (Debate)</option>
         </select>
       </div>
       <div id="inspector-type-specific"></div>
@@ -328,12 +328,12 @@ export class WebEditor {
     if (node.type === 'switch_mode') {
       box.innerHTML = `
         <div style="margin-top: 8px; padding: 10px; background: rgba(233, 30, 99, 0.1); border: 1px solid #e91e63; border-radius: 6px;">
-          <div style="font-weight: bold; color: #ff80ab; font-size: 12px; margin-bottom: 6px;">Mode Switch Settings (§6.2)</div>
-          <label style="font-size: 11px; color: #aaa;">Target Mode ID</label>
+          <div style="font-weight: bold; color: #ff80ab; font-size: 12px; margin-bottom: 6px;">模式切换设置 (§6.2)</div>
+          <label style="font-size: 11px; color: #aaa;">目标游戏模式</label>
           <select id="inp-target-mode" style="width: 100%; padding: 4px; background: #1c2237; border: 1px solid #3d496e; border-radius: 4px; color: #fff; margin-top: 2px;">
-            <option value="avg" ${node.data?.targetModeId === 'avg' ? 'selected' : ''}>AVG Mode</option>
-            <option value="rpg" ${node.data?.targetModeId === 'rpg' ? 'selected' : ''}>RPG Mode</option>
-            <option value="debate" ${node.data?.targetModeId === 'debate' ? 'selected' : ''}>Debate Mode</option>
+            <option value="avg" ${node.data?.targetModeId === 'avg' ? 'selected' : ''}>AVG 视觉小说模式</option>
+            <option value="rpg" ${node.data?.targetModeId === 'rpg' ? 'selected' : ''}>RPG 探索战斗模式</option>
+            <option value="debate" ${node.data?.targetModeId === 'debate' ? 'selected' : ''}>Debate 法庭辩论模式</option>
           </select>
         </div>
       `;
@@ -346,7 +346,7 @@ export class WebEditor {
     } else if (node.type === 'dialogue') {
       box.innerHTML = `
         <div style="margin-top: 8px;">
-          <label style="font-size: 11px; color: #aaa;">Dialogue Text</label>
+          <label style="font-size: 11px; color: #aaa;">对话文本内容</label>
           <textarea id="inp-diag-text" style="width: 100%; height: 80px; padding: 6px; background: #1c2237; border: 1px solid #3d496e; border-radius: 4px; color: #fff; margin-top: 2px;">${node.data?.text || ''}</textarea>
         </div>
       `;
@@ -400,8 +400,8 @@ export class WebEditor {
     const titleBar = document.createElement('div');
     titleBar.style.cssText = 'height: 36px; background: #161b2c; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; padding: 0 14px; color: #fff; font-size: 13px; font-weight: bold; user-select: none; z-index: 3000;';
     titleBar.innerHTML = `
-      <span>🎮 Playtest Session: ${this.projectData.manifest.name}</span>
-      <button id="close-playtest-btn" style="background: none; border: none; color: #ff5252; font-size: 18px; cursor: pointer;">✕</button>
+      <span>🎮 游戏实时试玩: ${this.projectData.manifest.name}</span>
+      <button id="close-playtest-btn" style="background: none; border: none; color: #ff5252; font-size: 18px; cursor: pointer;">✕ 退出试玩</button>
     `;
     win.appendChild(titleBar);
 

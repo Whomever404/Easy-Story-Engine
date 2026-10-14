@@ -1,16 +1,16 @@
 {
   "startMode": "avg",
   "startEvent": "ch1.prologue",
-  "gameTitle": "The Case of the Midnight Rain",
+  "gameTitle": "午夜之雨案",
   "version": "1.0.0",
   "initialParty": [
     "detective"
   ],
   "initialGold": 150,
   "terms": {
-    "hp": "HP",
-    "mp": "MP",
-    "gold": "Gold"
+    "hp": "生命值",
+    "mp": "法力值",
+    "gold": "金币"
   },
   "audioPolicy": "continue"
 }

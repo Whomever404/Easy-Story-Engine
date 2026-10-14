@@ -1,8 +1,8 @@
 {
   "ach_prologue": {
     "id": "ach_prologue",
-    "name": "A Rain of Mysteries",
-    "desc": "Begin your investigation in Easy Story Engine.",
+    "name": "暴雨中的迷局",
+    "desc": "在 Easy Story Engine 中开启您的初次调查旅程。",
     "secret": false,
     "trigger": {
       "switches": [
@@ -15,8 +15,8 @@
   },
   "ach_first_contradiction": {
     "id": "ach_first_contradiction",
-    "name": "Truth Unveiled (异议あり!)",
-    "desc": "Point out the critical contradiction in Mr. Vance testimony.",
+    "name": "真相大白 (异议あり!)",
+    "desc": "在法庭辩论中成功指出凡斯先生证言的致命矛盾。",
     "secret": false,
     "trigger": {
       "switches": [
@@ -29,8 +29,8 @@
   },
   "ach_rpg_battle": {
     "id": "ach_rpg_battle",
-    "name": "Town Square Protector",
-    "desc": "Defeat the ambush creature in RPG mode.",
+    "name": "城镇广场守护者",
+    "desc": "在 RPG 模式下击退伏击的暗影魔物。",
     "secret": false,
     "trigger": {
       "switches": [

@@ -24,16 +24,16 @@ export class DebateEditor {
 
     const sHeader = document.createElement('div');
     sHeader.style.cssText = 'padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;';
-    sHeader.innerHTML = '<span style="font-weight: bold; font-size: 13px;">Debate Trials</span>';
+    sHeader.innerHTML = '<span style="font-weight: bold; font-size: 13px;">法庭辩论剧本</span>';
 
     const addBtn = document.createElement('button');
-    addBtn.innerText = '+ New';
+    addBtn.innerText = '+ 新建剧本';
     addBtn.style.cssText = 'background: #2196f3; border: none; border-radius: 4px; color: #fff; padding: 4px 8px; font-size: 11px; cursor: pointer;';
     addBtn.onclick = () => {
       const newId = `debate_${Date.now()}`;
       this.debates[newId] = {
         id: newId,
-        title: 'New Courtroom Testimony',
+        title: '新法庭辩论证言',
         witnessId: 'suspect',
         penalty: 20,
         maxPressure: 100,
@@ -41,8 +41,8 @@ export class DebateEditor {
           {
             id: 's1',
             speakerId: 'suspect',
-            text: 'I was resting at home when the incident took place.',
-            pressResponseText: 'Are you absolutely certain? Yes, I was in my living room.',
+            text: '案发当时我一直在家里休息，什么都不知道。',
+            pressResponseText: '你确定一直在家吗？是的，我就在客厅看电视。',
           },
         ],
       };
@@ -59,7 +59,7 @@ export class DebateEditor {
       const item = document.createElement('div');
       const isSel = id === this.selectedId;
       item.style.cssText = `padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; background: ${isSel ? '#283593' : 'transparent'};`;
-      item.innerHTML = `<div style="font-weight: bold; font-size: 13px;">${deb.title}</div><div style="font-size: 11px; color: #aaa;">ID: ${deb.id}</div>`;
+      item.innerHTML = `<div style="font-weight: bold; font-size: 13px;">${deb.title}</div><div style="font-size: 11px; color: #aaa;">标识: ${deb.id}</div>`;
       item.onclick = () => {
         this.selectedId = id;
         this.render();
@@ -74,25 +74,25 @@ export class DebateEditor {
     main.style.cssText = 'flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px;';
 
     if (!this.selectedId || !this.debates[this.selectedId]) {
-      main.innerHTML = '<div style="color: #888;">Select a debate to edit.</div>';
+      main.innerHTML = '<div style="color: #888;">请在左侧选择辩论剧本进行编辑。</div>';
     } else {
       const deb = this.debates[this.selectedId];
       main.innerHTML = `
-        <h3 style="margin: 0; color: #e91e63;">Debate Trial: ${deb.title}</h3>
+        <h3 style="margin: 0; color: #e91e63;">法庭质询剧本: ${deb.title}</h3>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <div>
-            <label style="font-size: 12px; color: #aaa;">Title</label>
+            <label style="font-size: 12px; color: #aaa;">辩论主题标题</label>
             <input id="deb-title-input" type="text" value="${deb.title}" style="width: 100%; padding: 6px; background: #1c2237; border: 1px solid #3d496e; border-radius: 4px; color: #fff; margin-top: 4px;">
           </div>
           <div>
-            <label style="font-size: 12px; color: #aaa;">Penalty on Wrong Evidence (扣血/扣压力值)</label>
+            <label style="font-size: 12px; color: #aaa;">出示错误惩罚 (扣除信心/压力值)</label>
             <input id="deb-penalty-input" type="number" value="${deb.penalty}" style="width: 100%; padding: 6px; background: #1c2237; border: 1px solid #3d496e; border-radius: 4px; color: #fff; margin-top: 4px;">
           </div>
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
-          <h4 style="margin: 0; color: #64b5f6;">Testimony Sentences (证人证言序列)</h4>
-          <button id="add-sentence-btn" style="background: #1976d2; border: none; border-radius: 4px; color: #fff; padding: 4px 10px; font-size: 12px; cursor: pointer;">+ Add Sentence</button>
+          <h4 style="margin: 0; color: #64b5f6;">证人证言陈述序列</h4>
+          <button id="add-sentence-btn" style="background: #1976d2; border: none; border-radius: 4px; color: #fff; padding: 4px 10px; font-size: 12px; cursor: pointer;">+ 添加证言语句</button>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -101,11 +101,11 @@ export class DebateEditor {
               (s, i) => `
             <div style="padding: 12px; background: #1c2237; border-radius: 6px; border: 1px solid ${s.contradictionEvidenceId ? '#f44336' : '#3d496e'};">
               <div style="display: flex; justify-content: space-between; font-size: 12px; color: #90caf9; margin-bottom: 6px;">
-                <span>Statement ${i + 1}</span>
-                ${s.contradictionEvidenceId ? `<span style="color: #f44336; font-weight: bold;">[CONTRADICTION: ${s.contradictionEvidenceId}]</span>` : '<span style="color: #888;">[Normal Statement]</span>'}
+                <span>陈述句 ${i + 1}</span>
+                ${s.contradictionEvidenceId ? `<span style="color: #f44336; font-weight: bold;">[矛盾突破点: ${s.contradictionEvidenceId}]</span>` : '<span style="color: #888;">[常规证词]</span>'}
               </div>
               <div style="font-size: 14px; color: #fff; margin-bottom: 6px;">"${s.text}"</div>
-              <div style="font-size: 12px; color: #aaa;">Press Response: "${s.pressResponseText}"</div>
+              <div style="font-size: 12px; color: #aaa;">威慑追问回应: "${s.pressResponseText}"</div>
             </div>
           `
             )

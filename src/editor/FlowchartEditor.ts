@@ -279,19 +279,22 @@ export class FlowchartEditor {
 
     // Header color based on node type (§6.1, §6.2)
     let headerColor = '#1976d2'; // Default dialogue
-    let typeTag = 'DIALOGUE';
+    let typeTag = '对话剧情';
     if (node.type === 'switch_mode') {
       headerColor = '#e91e63'; // Mode Switch (special node §6.2)
-      typeTag = `MODE -> ${node.data?.targetModeId?.toUpperCase() || 'RPG'}`;
+      typeTag = `切换模式 -> ${node.data?.targetModeId?.toUpperCase() || 'RPG'}`;
     } else if (node.type === 'battle') {
       headerColor = '#f57c00';
-      typeTag = 'RPG BATTLE';
+      typeTag = '回合战斗';
     } else if (node.type === 'debate') {
       headerColor = '#7b1fa2';
-      typeTag = 'DEBATE TRIAL';
+      typeTag = '法庭辩论';
     } else if (node.type === 'choice') {
       headerColor = '#00897b';
-      typeTag = 'BRANCH CHOICES';
+      typeTag = '分支选项';
+    } else if (node.type === 'event') {
+      headerColor = '#5c6bc0';
+      typeTag = '事件序列';
     }
 
     // Card background

@@ -1,7 +1,7 @@
 [
   {
     "key": "rpg.gold",
-    "name": "Gold Currency",
+    "name": "金币储备",
     "type": "number",
     "default": 150,
     "hidden": false,
@@ -10,7 +10,7 @@
   },
   {
     "key": "plot.suspicion",
-    "name": "Suspect Guilt Meter",
+    "name": "嫌疑人罪证量表",
     "type": "number",
     "default": 0,
     "hidden": true,

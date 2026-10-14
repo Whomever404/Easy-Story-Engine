@@ -1,21 +1,28 @@
 @echo off
-chcp 65001 >nul
+cd /d "%~dp0"
+
 echo ========================================================
 echo       Easy Story Engine (ESE) 快速启动器
 echo ========================================================
 echo.
-echo 正在检查本地环境并启动预览服务器...
-echo.
 
-where npm >nul 2>nul
-if %ERRORLEVEL% NEQ 0 (
-    echo [提示] 未在 PATH 中找到 npm，尝试直接使用浏览器打开 index.html...
-    start "" "index.html"
-    pause
-    exit /b
+where node >nul 2>nul
+if %ERRORLEVEL% EQU 0 (
+    echo [OK] 检测到 Node.js 环境，正在启动内置服务...
+    node server.js
+    goto end
 )
 
-echo 正在启动本地开发服务器并打开浏览器...
-start "" http://localhost:3000
-npm run dev
+where python >nul 2>nul
+if %ERRORLEVEL% EQU 0 (
+    echo [OK] 检测到 Python 环境，正在启动内置服务...
+    start "" "http://localhost:3000"
+    python -m http.server 3000
+    goto end
+)
+
+echo [提示] 未检测到 Node 或 Python，正在直接打开 index.html...
+start "" "%~dp0index.html"
+
+:end
 pause

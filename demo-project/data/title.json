@@ -1,25 +1,25 @@
 {
-  "titleText": "The Case of the Midnight Rain",
+  "titleText": "午夜之雨案",
   "bgmTrack": "title_theme",
   "buttons": [
     {
       "id": "btn_new",
-      "label": "Start New Game",
+      "label": "开始新游戏",
       "action": "new_game"
     },
     {
       "id": "btn_cont",
-      "label": "Continue Journey",
+      "label": "继续探案旅程",
       "action": "continue"
     },
     {
       "id": "btn_ach",
-      "label": "Hall of Achievements",
+      "label": "成就殿堂",
       "action": "achievements"
     },
     {
       "id": "btn_gal",
-      "label": "CG Gallery",
+      "label": "CG 图库",
       "action": "gallery"
     }
   ]

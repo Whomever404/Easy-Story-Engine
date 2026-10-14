@@ -29,37 +29,37 @@ export class BlockEditor {
     // Toolbar for adding new blocks
     const toolbar = document.createElement('div');
     toolbar.style.cssText = 'padding: 12px 16px; background: #1c2237; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; gap: 8px; flex-wrap: wrap; align-items: center;';
-    toolbar.innerHTML = '<span style="font-size: 13px; font-weight: bold; color: #90caf9; margin-right: 6px;">+ Add Block:</span>';
+    toolbar.innerHTML = '<span style="font-size: 13px; font-weight: bold; color: #90caf9; margin-right: 6px;">+ 添加指令积木:</span>';
 
     const btnStyle = 'padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; color: #fff; transition: opacity 0.2s;';
 
     const addTextBtn = document.createElement('button');
-    addTextBtn.innerText = 'Text / Dialogue';
+    addTextBtn.innerText = '文字对话';
     addTextBtn.style.cssText = btnStyle + 'background: #1976d2;';
-    addTextBtn.onclick = () => this.addCommand('show_text', { characterName: 'Narrator', text: 'New dialogue text' });
+    addTextBtn.onclick = () => this.addCommand('show_text', { characterName: '旁白', text: '新对话台词文本' });
 
     const addChoiceBtn = document.createElement('button');
-    addChoiceBtn.innerText = 'Choices';
+    addChoiceBtn.innerText = '分支选项';
     addChoiceBtn.style.cssText = btnStyle + 'background: #00897b;';
-    addChoiceBtn.onclick = () => this.addCommand('show_choices', { prompt: 'Select an action:', choices: [{ label: 'Option 1' }, { label: 'Option 2' }] });
+    addChoiceBtn.onclick = () => this.addCommand('show_choices', { prompt: '请选择行动:', choices: [{ label: '选项一' }, { label: '选项二' }] });
 
     const addBranchBtn = document.createElement('button');
-    addBranchBtn.innerText = 'Condition';
+    addBranchBtn.innerText = '条件分支';
     addBranchBtn.style.cssText = btnStyle + 'background: #f57c00;';
     addBranchBtn.onclick = () => this.addCommand('conditional_branch', { condition: { switches: [{ key: 'flag1', value: true }] }, thenCommands: [] });
 
     const addModeBtn = document.createElement('button');
-    addModeBtn.innerText = 'Switch Mode';
+    addModeBtn.innerText = '切换游戏模式';
     addModeBtn.style.cssText = btnStyle + 'background: #e91e63;';
-    addModeBtn.onclick = () => this.addCommand('switch_mode', { targetModeId: 'rpg', params: { mapId: 'town' } });
+    addModeBtn.onclick = () => this.addCommand('switch_mode', { targetModeId: 'rpg', params: { mapId: 'town_square' } });
 
     const addSwitchBtn = document.createElement('button');
-    addSwitchBtn.innerText = 'Switch / Variable';
+    addSwitchBtn.innerText = '开关/变量控制';
     addSwitchBtn.style.cssText = btnStyle + 'background: #7b1fa2;';
     addSwitchBtn.onclick = () => this.addCommand('control_switches', { key: 'plot_flag', value: true });
 
     const addAudioBtn = document.createElement('button');
-    addAudioBtn.innerText = 'Audio BGM/SE';
+    addAudioBtn.innerText = '播放音效/BGM';
     addAudioBtn.style.cssText = btnStyle + 'background: #388e3c;';
     addAudioBtn.onclick = () => this.addCommand('play_se', { track: 'confirm' });
 
@@ -71,7 +71,7 @@ export class BlockEditor {
     list.style.cssText = 'flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 8px;';
 
     if (this.commands.length === 0) {
-      list.innerHTML = '<div style="color: #777; text-align: center; padding: 40px;">No command blocks. Click above to add blocks to this sequence.</div>';
+      list.innerHTML = '<div style="color: #777; text-align: center; padding: 40px;">暂无指令积木。点击上方按钮向事件序列添加指令积木。</div>';
     } else {
       this.commands.forEach((cmd, idx) => {
         const block = this.renderCommandBlock(cmd, idx);
@@ -108,22 +108,22 @@ export class BlockEditor {
     const block = document.createElement('div');
 
     let borderColor = '#1976d2';
-    let blockTitle = 'Show Text';
+    let blockTitle = '显示台词文字';
     if (cmd.code === 'switch_mode') {
       borderColor = '#e91e63';
-      blockTitle = 'Switch Game Mode';
+      blockTitle = '切换游戏模式';
     } else if (cmd.code === 'show_choices') {
       borderColor = '#00897b';
-      blockTitle = 'Show Choices';
+      blockTitle = '显示分支选项';
     } else if (cmd.code === 'conditional_branch') {
       borderColor = '#f57c00';
-      blockTitle = 'Conditional Branch';
+      blockTitle = '条件分支';
     } else if (cmd.code === 'control_switches' || cmd.code === 'control_variables') {
       borderColor = '#7b1fa2';
-      blockTitle = 'Variable / Switch';
+      blockTitle = '变量/开关操作';
     } else if (cmd.code.includes('bgm') || cmd.code.includes('se')) {
       borderColor = '#388e3c';
-      blockTitle = 'Play Audio';
+      blockTitle = '音频播放控制';
     }
 
     block.style.cssText = `
@@ -145,17 +145,17 @@ export class BlockEditor {
     actions.style.cssText = 'display: flex; gap: 6px; align-items: center;';
 
     const upBtn = document.createElement('button');
-    upBtn.innerText = '▲';
-    upBtn.style.cssText = 'background: #2a3350; border: none; border-radius: 4px; color: #fff; cursor: pointer; padding: 4px 8px; font-size: 10px;';
+    upBtn.innerText = '▲ 上移';
+    upBtn.style.cssText = 'background: #2a3350; border: none; border-radius: 4px; color: #fff; cursor: pointer; padding: 4px 8px; font-size: 11px;';
     upBtn.onclick = () => this.moveCommand(index, -1);
 
     const downBtn = document.createElement('button');
-    downBtn.innerText = '▼';
-    downBtn.style.cssText = 'background: #2a3350; border: none; border-radius: 4px; color: #fff; cursor: pointer; padding: 4px 8px; font-size: 10px;';
+    downBtn.innerText = '▼ 下移';
+    downBtn.style.cssText = 'background: #2a3350; border: none; border-radius: 4px; color: #fff; cursor: pointer; padding: 4px 8px; font-size: 11px;';
     downBtn.onclick = () => this.moveCommand(index, 1);
 
     const delBtn = document.createElement('button');
-    delBtn.innerText = '✕';
+    delBtn.innerText = '✕ 删除';
     delBtn.style.cssText = 'background: #c62828; border: none; border-radius: 4px; color: #fff; cursor: pointer; padding: 4px 8px; font-size: 11px;';
     delBtn.onclick = () => this.deleteCommand(index);
 
@@ -166,14 +166,14 @@ export class BlockEditor {
 
   private formatCommandParameters(cmd: EventCommand): string {
     if (cmd.code === 'show_text') {
-      return `${cmd.parameters.characterName || 'Narrator'}: "${cmd.parameters.text || ''}"`;
+      return `${cmd.parameters.characterName || '旁白'}: "${cmd.parameters.text || ''}"`;
     }
     if (cmd.code === 'switch_mode') {
-      return `Target Mode: <b>${cmd.parameters.targetModeId}</b>`;
+      return `目标模式: <b>${cmd.parameters.targetModeId}</b>`;
     }
     if (cmd.code === 'show_choices') {
       const choices = cmd.parameters.choices || [];
-      return `Prompt: "${cmd.parameters.prompt || ''}" | Options: [${choices.map((c: any) => c.label).join(', ')}]`;
+      return `提示: "${cmd.parameters.prompt || ''}" | 分支项: [${choices.map((c: any) => c.label).join(', ')}]`;
     }
     return JSON.stringify(cmd.parameters);
   }

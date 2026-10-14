@@ -35,8 +35,8 @@ export class MindmapEditor {
       text-align: center;
     `;
     centerNode.innerHTML = `
-      <div>${this.graph.title || 'Chapter Root'}</div>
-      <div style="font-size: 12px; color: #bbdefb; margin-top: 4px;">Chapter ID: ${this.graph.id}</div>
+      <div>${this.graph.title || '章节主轴'}</div>
+      <div style="font-size: 12px; color: #bbdefb; margin-top: 4px;">章节 ID: ${this.graph.id}</div>
     `;
     root.appendChild(centerNode);
 
@@ -64,14 +64,15 @@ export class MindmapEditor {
       };
 
       const tagColor = node.type === 'switch_mode' ? '#e91e63' : node.type === 'battle' ? '#f57c00' : '#2196f3';
+      const typeLabel = node.type === 'switch_mode' ? '切换模式' : node.type === 'battle' ? '回合战斗' : node.type === 'debate' ? '法庭辩论' : node.type === 'choice' ? '分支选项' : '剧情对话';
 
       card.innerHTML = `
         <div style="display: inline-block; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; background: ${tagColor}; margin-bottom: 8px;">
-          ${node.type.toUpperCase()}
+          ${typeLabel}
         </div>
         <div style="font-weight: bold; font-size: 15px; margin-bottom: 6px;">${node.title}</div>
         <div style="font-size: 12px; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-          ${node.data?.text || node.data?.targetModeId || 'Event Node'}
+          ${node.data?.text || node.data?.targetModeId || '事件节点'}
         </div>
       `;
 

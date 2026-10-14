@@ -137,10 +137,10 @@ export class RpgMode implements GameModeModule {
       border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; z-index: 5;
     `;
     hud.innerHTML = `
-      <div style="font-weight: bold; color: #64b5f6;">Map: <span id="rpg-hud-map-name"></span></div>
+      <div style="font-weight: bold; color: #64b5f6;">当前地图: <span id="rpg-hud-map-name"></span></div>
       <div style="display: flex; gap: 16px; font-size: 14px;">
-        <span style="color: #ffd54f;">Gold: <span id="rpg-hud-gold">0</span></span>
-        <button id="rpg-hud-bag-btn" style="background: #283593; border: 1px solid #5c6bc0; color: #fff; padding: 2px 10px; border-radius: 4px; cursor: pointer;">Items</button>
+        <span style="color: #ffd54f;">持有金币: <span id="rpg-hud-gold">0</span></span>
+        <button id="rpg-hud-bag-btn" style="background: #283593; border: 1px solid #5c6bc0; color: #fff; padding: 2px 10px; border-radius: 4px; cursor: pointer;">背包道具</button>
       </div>
     `;
     root.appendChild(hud);
@@ -156,7 +156,7 @@ export class RpgMode implements GameModeModule {
     dpad.innerHTML = `
       <div></div><button data-dir="up" style="background: rgba(255,255,255,0.2); border: none; border-radius: 6px; color: #fff; font-size: 18px; cursor: pointer;">▲</button><div></div>
       <button data-dir="left" style="background: rgba(255,255,255,0.2); border: none; border-radius: 6px; color: #fff; font-size: 18px; cursor: pointer;">◀</button>
-      <button data-dir="action" style="background: #e91e63; border: none; border-radius: 6px; color: #fff; font-size: 13px; font-weight: bold; cursor: pointer;">OK</button>
+      <button data-dir="action" style="background: #e91e63; border: none; border-radius: 6px; color: #fff; font-size: 13px; font-weight: bold; cursor: pointer;">确定</button>
       <button data-dir="right" style="background: rgba(255,255,255,0.2); border: none; border-radius: 6px; color: #fff; font-size: 18px; cursor: pointer;">▶</button>
       <div></div><button data-dir="down" style="background: rgba(255,255,255,0.2); border: none; border-radius: 6px; color: #fff; font-size: 18px; cursor: pointer;">▼</button><div></div>
     `;
@@ -625,7 +625,7 @@ export class RpgMode implements GameModeModule {
     const btnStyle = 'background: #1976d2; border: none; border-radius: 6px; color: #fff; font-size: 15px; font-weight: bold; padding: 12px; cursor: pointer; transition: 0.2s;';
 
     const atkBtn = document.createElement('button');
-    atkBtn.innerText = 'Attack';
+    atkBtn.innerText = '普通攻击';
     atkBtn.style.cssText = btnStyle;
     atkBtn.onclick = () => {
       if (!this.activeBattle) return;
@@ -637,7 +637,7 @@ export class RpgMode implements GameModeModule {
     };
 
     const skillBtn = document.createElement('button');
-    skillBtn.innerText = 'Skill';
+    skillBtn.innerText = '技能招式';
     skillBtn.style.cssText = btnStyle + 'background: #7b1fa2;';
     skillBtn.onclick = () => {
       if (!this.activeBattle) return;
@@ -649,7 +649,7 @@ export class RpgMode implements GameModeModule {
     };
 
     const escapeBtn = document.createElement('button');
-    escapeBtn.innerText = 'Escape';
+    escapeBtn.innerText = '尝试逃跑';
     escapeBtn.style.cssText = btnStyle + 'background: #e65100;';
     escapeBtn.onclick = () => {
       if (!this.activeBattle) return;
@@ -710,7 +710,7 @@ export class RpgMode implements GameModeModule {
     box.style.cssText = 'background: #181d2e; border: 1px solid #3d496e; border-radius: 12px; width: 440px; padding: 20px;';
     box.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-        <h3 style="margin: 0; color: #64b5f6;">RPG Inventory</h3>
+        <h3 style="margin: 0; color: #64b5f6;">RPG 道具与装备背包</h3>
         <button id="close-rpg-bag" style="background: none; border: none; color: #aaa; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div id="rpg-bag-list" style="display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow-y: auto;"></div>
@@ -718,17 +718,18 @@ export class RpgMode implements GameModeModule {
 
     const list = box.querySelector('#rpg-bag-list')!;
     if (items.length === 0) {
-      list.innerHTML = '<div style="color: #999;">No equipment or RPG items.</div>';
+      list.innerHTML = '<div style="color: #999;">暂无装备或道具。</div>';
     } else {
       items.forEach((item) => {
         const entity = this.ctx?.shell.getEntity(item.id);
         const facet = entity?.facets?.rpg;
+        const typeZh = facet?.type === 'weapon' ? '武器' : facet?.type === 'armor' ? '防具' : '消耗道具';
         const entry = document.createElement('div');
         entry.style.cssText = 'padding: 8px 12px; background: rgba(255,255,255,0.05); border-radius: 6px; display: flex; justify-content: space-between; align-items: center;';
         entry.innerHTML = `
           <div>
-            <div style="font-weight: bold; color: #ffd54f;">${entity?.base?.name || item.id} (x${item.count})</div>
-            <div style="font-size: 12px; color: #aaa;">[${facet?.type?.toUpperCase() || item.type.toUpperCase()}] ${entity?.base?.desc || ''}</div>
+            <div style="font-weight: bold; color: #ffd54f;">${entity?.base?.name || item.id} (数量: ${item.count})</div>
+            <div style="font-size: 12px; color: #aaa;">[${typeZh}] ${entity?.base?.desc || ''}</div>
           </div>
         `;
         list.appendChild(entry);

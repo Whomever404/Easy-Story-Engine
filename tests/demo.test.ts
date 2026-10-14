@@ -44,9 +44,9 @@ describe('Demo Project & End-to-End Game Flow', () => {
     readDir(demoDir);
 
     const reloaded = EsprojProtocol.importFromDirectoryMap(fileMap);
-    expect(reloaded.manifest.name).toBe('The Case of the Midnight Rain');
+    expect(reloaded.manifest.name).toBe('午夜之雨案');
     expect(reloaded.manifest.startMode).toBe('avg');
-    expect(reloaded.characters['assistant'].name).toBe('Maya');
+    expect(reloaded.characters['assistant'].name).toBe('真宵');
   });
 
   it('runs complete multi-mode narrative cycle: AVG -> RPG -> Debate -> Victory', async () => {
@@ -77,7 +77,7 @@ describe('Demo Project & End-to-End Game Flow', () => {
     phone.checkTriggers();
     expect(shell.state.msgState.threads['assistant']).toBeDefined();
     const firstMsg = shell.state.msgState.threads['assistant'].messages[0];
-    expect(firstMsg.content).toContain('Herbal Tea');
+    expect(firstMsg.content).toContain('舒缓草药茶');
 
     // Reply to Maya
     const reply1 = firstMsg.replies![0];

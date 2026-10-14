@@ -91,11 +91,11 @@ export class DebateMode implements GameModeModule {
     `;
     topBar.innerHTML = `
       <div>
-        <span style="font-size: 13px; color: #ff9800; font-weight: bold; letter-spacing: 1px;">TESTIMONY & CROSS-EXAMINATION</span>
-        <h2 id="debate-title" style="margin: 4px 0 0 0; font-size: 20px; color: #64b5f6;">Courtroom Debate</h2>
+        <span style="font-size: 13px; color: #ff9800; font-weight: bold; letter-spacing: 1px;">证言陈述与交叉质询</span>
+        <h2 id="debate-title" style="margin: 4px 0 0 0; font-size: 20px; color: #64b5f6;">法庭辩论质询</h2>
       </div>
       <div style="width: 240px; text-align: right;">
-        <div style="font-size: 13px; color: #eee; margin-bottom: 4px;">Confidence / Pressure</div>
+        <div style="font-size: 13px; color: #eee; margin-bottom: 4px;">辩护信心 / 压制条</div>
         <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.15); border-radius: 5px; overflow: hidden;">
           <div id="debate-pressure-bar" style="width: 100%; height: 100%; background: #4caf50; transition: width 0.3s ease, background-color 0.3s ease;"></div>
         </div>
@@ -111,7 +111,7 @@ export class DebateMode implements GameModeModule {
     witnessBox.style.cssText = 'text-align: center; margin-bottom: 20px;';
     witnessBox.innerHTML = `
       <div style="font-size: 64px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));">🧑‍⚖️</div>
-      <div id="debate-witness-name" style="font-weight: bold; color: #ffd54f; font-size: 18px; margin-top: 6px;">Witness</div>
+      <div id="debate-witness-name" style="font-weight: bold; color: #ffd54f; font-size: 18px; margin-top: 6px;">证人席</div>
     `;
     middleSection.appendChild(witnessBox);
 
@@ -125,8 +125,8 @@ export class DebateMode implements GameModeModule {
     `;
     sentenceCard.innerHTML = `
       <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px; color: #90caf9;">
-        <span>Statement <span id="debate-sentence-num">1/5</span></span>
-        <span id="debate-contradiction-indicator" style="display: none; color: #f44336; font-weight: bold;">[CONTRADICTION POINT]</span>
+        <span>陈述句 <span id="debate-sentence-num">1/5</span></span>
+        <span id="debate-contradiction-indicator" style="display: none; color: #f44336; font-weight: bold;">[矛盾突破点]</span>
       </div>
       <div id="debate-sentence-text" style="font-size: 20px; line-height: 1.5; color: #fff; min-height: 60px;"></div>
     `;
@@ -140,22 +140,22 @@ export class DebateMode implements GameModeModule {
     const navBtnStyle = 'padding: 12px 24px; font-size: 15px; font-weight: bold; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(30, 36, 56, 0.9); color: #fff; cursor: pointer; transition: 0.2s;';
 
     const prevBtn = document.createElement('button');
-    prevBtn.innerText = '◀ Prev Statement';
+    prevBtn.innerText = '◀ 上一句证词';
     prevBtn.style.cssText = navBtnStyle;
     prevBtn.onclick = () => this.navigateSentence(-1);
 
     const pressBtn = document.createElement('button');
-    pressBtn.innerText = 'HOLD IT! (追问/威慑)';
+    pressBtn.innerText = '等一下！追问 (HOLD IT!)';
     pressBtn.style.cssText = navBtnStyle + 'background: #0288d1; border-color: #29b6f6;';
     pressBtn.onclick = () => this.pressCurrentSentence();
 
     const presentBtn = document.createElement('button');
-    presentBtn.innerText = 'OBJECTION! (出示证物)';
+    presentBtn.innerText = '异议！出示证物 (OBJECTION!)';
     presentBtn.style.cssText = navBtnStyle + 'background: #d32f2f; border-color: #f44336; font-size: 16px;';
     presentBtn.onclick = () => this.openEvidenceModal();
 
     const nextBtn = document.createElement('button');
-    nextBtn.innerText = 'Next Statement ▶';
+    nextBtn.innerText = '下一句证词 ▶';
     nextBtn.style.cssText = navBtnStyle;
     nextBtn.onclick = () => this.navigateSentence(1);
 
@@ -294,7 +294,7 @@ export class DebateMode implements GameModeModule {
     box.style.cssText = 'background: #191f33; border: 2px solid #f44336; border-radius: 12px; width: 500px; max-width: 90%; padding: 20px;';
     box.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
-        <h3 style="margin: 0; color: #f44336;">Select Evidence to Present (出示证物)</h3>
+        <h3 style="margin: 0; color: #f44336;">选择证物出示 (出示证物)</h3>
         <button id="close-evidence-modal" style="background: none; border: none; color: #aaa; font-size: 18px; cursor: pointer;">✕</button>
       </div>
       <div id="evidence-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; max-height: 320px; overflow-y: auto;"></div>
@@ -302,7 +302,7 @@ export class DebateMode implements GameModeModule {
 
     const list = box.querySelector('#evidence-list')!;
     if (items.length === 0) {
-      list.innerHTML = '<div style="color: #999; grid-column: 1/-1;">Court record is empty. No evidence in hand!</div>';
+      list.innerHTML = '<div style="color: #999; grid-column: 1/-1;">法庭纪录为空，当前未持有任何可出示的证物！</div>';
     } else {
       items.forEach((it) => {
         const entity = this.ctx?.shell.getEntity(it.id);
@@ -315,7 +315,7 @@ export class DebateMode implements GameModeModule {
         card.onmouseleave = () => (card.style.borderColor = 'rgba(255,255,255,0.15)');
         card.innerHTML = `
           <div style="font-weight: bold; color: #ffd54f;">${entity?.base?.name || it.id}</div>
-          <div style="font-size: 11px; color: #64b5f6; margin: 2px 0;">[${it.category.toUpperCase()}]</div>
+          <div style="font-size: 11px; color: #64b5f6; margin: 2px 0;">[证物]</div>
           <div style="font-size: 12px; color: #ddd;">${entity?.base?.desc || ''}</div>
         `;
         card.onclick = () => {

@@ -221,7 +221,7 @@ export class PhoneMessagingSystem {
       <div style="background: #181d2e; padding: 12px 18px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; color: #fff;">
         <div style="display: flex; align-items: center; gap: 8px;">
           <button id="phone-back-btn" style="background: none; border: none; color: #64b5f6; font-size: 18px; cursor: pointer; display: none;">◀</button>
-          <span id="phone-header-title" style="font-weight: bold; font-size: 16px;">Messages</span>
+          <span id="phone-header-title" style="font-weight: bold; font-size: 16px;">手机短信</span>
         </div>
         <button id="phone-close-btn" style="background: none; border: none; color: #aaa; font-size: 18px; cursor: pointer;">✕</button>
       </div>
@@ -294,7 +294,7 @@ export class PhoneMessagingSystem {
     const title = this.rootElement.querySelector('#phone-header-title') as HTMLElement;
 
     if (backBtn) backBtn.style.display = 'none';
-    if (title) title.textContent = 'Messages';
+    if (title) title.textContent = '手机短信';
 
     const threads = Object.values(this.shell.state.msgState.threads);
     body.innerHTML = '';
@@ -303,7 +303,7 @@ export class PhoneMessagingSystem {
     list.style.cssText = 'flex: 1; overflow-y: auto; display: flex; flex-direction: column;';
 
     if (threads.length === 0) {
-      list.innerHTML = '<div style="color: #777; padding: 40px; text-align: center;">No messages yet.</div>';
+      list.innerHTML = '<div style="color: #777; padding: 40px; text-align: center;">暂无短信消息。</div>';
     } else {
       threads.forEach((t) => {
         const item = document.createElement('div');
