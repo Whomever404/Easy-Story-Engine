@@ -1,0 +1,20 @@
+[
+  {
+    "key": "rpg.gold",
+    "name": "Gold Currency",
+    "type": "number",
+    "default": 150,
+    "hidden": false,
+    "domain": "rpg",
+    "exposeToTriggers": true
+  },
+  {
+    "key": "plot.suspicion",
+    "name": "Suspect Guilt Meter",
+    "type": "number",
+    "default": 0,
+    "hidden": true,
+    "domain": "debate",
+    "exposeToTriggers": true
+  }
+]

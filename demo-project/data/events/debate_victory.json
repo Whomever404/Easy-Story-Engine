@@ -1,0 +1,37 @@
+{
+  "id": "debate_victory",
+  "name": "Debate Victory Event",
+  "commands": [
+    {
+      "code": "control_switches",
+      "parameters": {
+        "key": "debate_cleared",
+        "value": true
+      }
+    },
+    {
+      "code": "switch_mode",
+      "parameters": {
+        "targetModeId": "avg"
+      }
+    },
+    {
+      "code": "show_text",
+      "parameters": {
+        "characterId": "suspect",
+        "characterName": "Mr. Vance",
+        "text": "I... I confess! I took the umbrella because it was pouring rain outside! You broke my alibi completely!",
+        "emotion": "sorrow"
+      }
+    },
+    {
+      "code": "show_text",
+      "parameters": {
+        "characterId": "assistant",
+        "characterName": "Maya",
+        "text": "We did it! Case closed! Easy Story Engine handled the multi-mode transition smoothly!",
+        "emotion": "joy"
+      }
+    }
+  ]
+}

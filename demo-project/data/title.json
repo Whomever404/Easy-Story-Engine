@@ -1,0 +1,26 @@
+{
+  "titleText": "The Case of the Midnight Rain",
+  "bgmTrack": "title_theme",
+  "buttons": [
+    {
+      "id": "btn_new",
+      "label": "Start New Game",
+      "action": "new_game"
+    },
+    {
+      "id": "btn_cont",
+      "label": "Continue Journey",
+      "action": "continue"
+    },
+    {
+      "id": "btn_ach",
+      "label": "Hall of Achievements",
+      "action": "achievements"
+    },
+    {
+      "id": "btn_gal",
+      "label": "CG Gallery",
+      "action": "gallery"
+    }
+  ]
+}

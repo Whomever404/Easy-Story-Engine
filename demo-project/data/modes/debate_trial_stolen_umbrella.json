@@ -1,0 +1,36 @@
+{
+  "id": "trial_stolen_umbrella",
+  "title": "Testimony: Whereabouts During the Storm",
+  "witnessId": "suspect",
+  "penalty": 25,
+  "maxPressure": 100,
+  "sentences": [
+    {
+      "id": "s1",
+      "speakerId": "suspect",
+      "text": "I stayed inside the warmth of the coffee shop from 8 PM until 10 PM sharp.",
+      "pressResponseText": "Are you sure about the timing? Yes, the grandfather clock was right above my seat."
+    },
+    {
+      "id": "s2",
+      "speakerId": "suspect",
+      "text": "The weather was completely pleasant and dry when I strolled back home.",
+      "pressResponseText": "I wore my lightest clothes; there was no rain whatsoever."
+    },
+    {
+      "id": "s3",
+      "speakerId": "suspect",
+      "text": "I never touched or carried an umbrella throughout the whole evening!",
+      "contradictionEvidenceId": "wet_umbrella",
+      "pressResponseText": "Why would anyone carry an umbrella on a dry night?",
+      "breakthroughStoryLabel": "debate_victory"
+    },
+    {
+      "id": "s4",
+      "speakerId": "suspect",
+      "text": "After that, I rode my bicycle peacefully back to my flat.",
+      "pressResponseText": "My bicycle is stored safely in my apartment lobby."
+    }
+  ],
+  "onVictoryEvent": "debate_victory"
+}

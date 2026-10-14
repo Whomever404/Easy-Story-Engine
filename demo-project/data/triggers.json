@@ -1,0 +1,11 @@
+{
+  "has_tea": {
+    "items": [
+      {
+        "id": "herbal_tea",
+        "domain": "avg",
+        "count": 1
+      }
+    ]
+  }
+}

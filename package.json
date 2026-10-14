@@ -1,0 +1,29 @@
+{
+  "name": "easy-story-engine",
+  "version": "1.0.0",
+  "description": "Easy Story Engine (ESE) - Modular Multi-Mode Narrative Game Engine",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "game-engine",
+    "narrative",
+    "visual-novel",
+    "rpg",
+    "debate"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "happy-dom": "^21.0.1",
+    "jszip": "^3.10.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
+  }
+}

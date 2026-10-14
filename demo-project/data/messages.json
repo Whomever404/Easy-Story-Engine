@@ -1,0 +1,37 @@
+{
+  "maya_opening_msg": {
+    "id": "maya_opening_msg",
+    "characterId": "assistant",
+    "trigger": {
+      "switches": [
+        {
+          "key": "game_started",
+          "value": true
+        }
+      ]
+    },
+    "triggerOnce": true,
+    "messages": [
+      {
+        "id": "msg_1",
+        "senderId": "assistant",
+        "type": "text",
+        "content": "Ren! I brewed some \\C[#64b5f6]Herbal Tea\\C[#ffffff] for you. Also, be sure to check the alleyway!",
+        "replies": [
+          {
+            "id": "rep_1",
+            "text": "Thanks Maya! You are the best.",
+            "affectionDelta": {
+              "characterId": "assistant",
+              "delta": 10
+            }
+          },
+          {
+            "id": "rep_2",
+            "text": "Let us stay focused on the case."
+          }
+        ]
+      }
+    ]
+  }
+}

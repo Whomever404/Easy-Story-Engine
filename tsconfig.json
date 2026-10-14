@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "moduleResolution": "bundler",
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@engine/*": ["./src/engine/*"],
+      "@project/*": ["./src/project/*"],
+      "@editor/*": ["./src/editor/*"]
+    }
+  },
+  "include": ["src", "tests", "vite.config.ts"]
+}
