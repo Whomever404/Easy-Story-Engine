@@ -1,0 +1,16 @@
+{
+  "startMode": "avg",
+  "startEvent": "ch1.prologue",
+  "gameTitle": "The Case of the Midnight Rain",
+  "version": "1.0.0",
+  "initialParty": [
+    "detective"
+  ],
+  "initialGold": 150,
+  "terms": {
+    "hp": "HP",
+    "mp": "MP",
+    "gold": "Gold"
+  },
+  "audioPolicy": "continue"
+}

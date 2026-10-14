@@ -1,0 +1,78 @@
+{
+  "detective": {
+    "id": "detective",
+    "name": "Detective Ren",
+    "title": "Ace Investigator",
+    "initialAffection": 0,
+    "sprites": {
+      "portrait": {
+        "normal": "assets/images/ren_normal.png",
+        "joy": "assets/images/ren_joy.png",
+        "anger": "assets/images/ren_anger.png",
+        "sorrow": "assets/images/ren_sorrow.png"
+      }
+    },
+    "traits": [
+      {
+        "id": "observation",
+        "name": "Observation (观察力)",
+        "modeMapping": {
+          "avg": {
+            "presentHintLevel": 1
+          },
+          "rpg": {
+            "hitRateBonus": 0.05
+          },
+          "debate": {
+            "pressCountBonus": 1
+          }
+        }
+      }
+    ]
+  },
+  "assistant": {
+    "id": "assistant",
+    "name": "Maya",
+    "title": "Spirit Medium Assistant",
+    "initialAffection": 25,
+    "sprites": {
+      "portrait": {
+        "normal": "assets/images/maya_normal.png",
+        "joy": "assets/images/maya_joy.png",
+        "anger": "assets/images/maya_anger.png",
+        "sorrow": "assets/images/maya_sorrow.png"
+      },
+      "face": {
+        "normal": "assets/images/maya_face.png",
+        "joy": "assets/images/maya_face_joy.png",
+        "anger": "assets/images/maya_face_ang.png",
+        "sorrow": "assets/images/maya_face_sor.png"
+      }
+    }
+  },
+  "suspect": {
+    "id": "suspect",
+    "name": "Mr. Vance",
+    "title": "Antiques Dealer",
+    "sprites": {
+      "portrait": {
+        "normal": "assets/images/vance_norm.png",
+        "joy": "assets/images/vance_joy.png",
+        "anger": "assets/images/vance_ang.png",
+        "sorrow": "assets/images/vance_sor.png"
+      }
+    }
+  },
+  "guard": {
+    "id": "guard",
+    "name": "Officer Drake",
+    "sprites": {
+      "portrait": {
+        "normal": "assets/images/drake_norm.png",
+        "joy": "assets/images/drake_joy.png",
+        "anger": "assets/images/drake_ang.png",
+        "sorrow": "assets/images/drake_sor.png"
+      }
+    }
+  }
+}

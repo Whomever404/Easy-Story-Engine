@@ -1,0 +1,44 @@
+{
+  "ach_prologue": {
+    "id": "ach_prologue",
+    "name": "A Rain of Mysteries",
+    "desc": "Begin your investigation in Easy Story Engine.",
+    "secret": false,
+    "trigger": {
+      "switches": [
+        {
+          "key": "game_started",
+          "value": true
+        }
+      ]
+    }
+  },
+  "ach_first_contradiction": {
+    "id": "ach_first_contradiction",
+    "name": "Truth Unveiled (异议あり!)",
+    "desc": "Point out the critical contradiction in Mr. Vance testimony.",
+    "secret": false,
+    "trigger": {
+      "switches": [
+        {
+          "key": "debate_cleared",
+          "value": true
+        }
+      ]
+    }
+  },
+  "ach_rpg_battle": {
+    "id": "ach_rpg_battle",
+    "name": "Town Square Protector",
+    "desc": "Defeat the ambush creature in RPG mode.",
+    "secret": false,
+    "trigger": {
+      "switches": [
+        {
+          "key": "battle_won",
+          "value": true
+        }
+      ]
+    }
+  }
+}

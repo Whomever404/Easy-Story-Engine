@@ -1,0 +1,18 @@
+{
+  "format": "esproj",
+  "formatVersion": 3,
+  "engine": ">=0.9.0",
+  "name": "The Case of the Midnight Rain",
+  "id": "com.ese.demo.midnightrain",
+  "created": 1730000000,
+  "modified": 1791966625155,
+  "startMode": "avg",
+  "startEvent": "ch1.prologue",
+  "modes": [
+    "avg",
+    "rpg",
+    "debate"
+  ],
+  "plugins": [],
+  "checksum": "demo_checksum_ok"
+}

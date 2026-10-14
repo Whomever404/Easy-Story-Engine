@@ -1,0 +1,83 @@
+{
+  "wet_umbrella": {
+    "id": "wet_umbrella",
+    "base": {
+      "name": "Dripping Umbrella",
+      "icon": "umbrella.png",
+      "desc": "A soaked umbrella recovered from the coffee shop alleyway.",
+      "storyTags": [
+        "evidence",
+        "rain"
+      ]
+    },
+    "facets": {
+      "avg": {
+        "category": "evidence",
+        "unlockFlags": [
+          "knows_umbrella_found"
+        ],
+        "presentReactions": {
+          "suspect": {
+            "text": "H-Hey! Where did you dig up that drenched umbrella?!"
+          }
+        }
+      },
+      "rpg": {
+        "type": "weapon",
+        "atk": 5,
+        "price": 20,
+        "slot": "weapon"
+      },
+      "debate": {
+        "contradictionIds": [
+          "s3"
+        ],
+        "pressResponse": "Look closely! The umbrella is still dripping wet with rainwater!"
+      }
+    }
+  },
+  "herbal_tea": {
+    "id": "herbal_tea",
+    "base": {
+      "name": "Soothing Herbal Tea",
+      "icon": "tea.png",
+      "desc": "Warm chamomile tea that lifts the spirits.",
+      "storyTags": [
+        "gift",
+        "drink"
+      ]
+    },
+    "facets": {
+      "avg": {
+        "category": "gift",
+        "effectValue": 20,
+        "targetCharacterId": "assistant"
+      },
+      "rpg": {
+        "type": "item",
+        "hpRecovery": 60,
+        "price": 25,
+        "consumable": true
+      }
+    }
+  },
+  "iron_sword": {
+    "id": "iron_sword",
+    "base": {
+      "name": "Town Guard Sword",
+      "icon": "sword.png",
+      "desc": "A well-balanced steel blade standard issue to city guards.",
+      "storyTags": [
+        "weapon"
+      ]
+    },
+    "facets": {
+      "rpg": {
+        "type": "weapon",
+        "atk": 18,
+        "price": 80,
+        "slot": "weapon"
+      }
+    }
+  }
+}

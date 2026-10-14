@@ -1,0 +1,95 @@
+{
+  "id": "ch1",
+  "chapter": "1",
+  "title": "Chapter 1: The Midnight Rain",
+  "startNodeId": "prologue",
+  "nodes": {
+    "prologue": {
+      "id": "prologue",
+      "title": "Detective Office",
+      "type": "event",
+      "position": {
+        "x": 50,
+        "y": 150
+      },
+      "data": {
+        "commands": [
+          {
+            "code": "control_switches",
+            "parameters": {
+              "key": "game_started",
+              "value": true
+            }
+          },
+          {
+            "code": "unlock_achievement",
+            "parameters": {
+              "achievementId": "ach_prologue"
+            }
+          },
+          {
+            "code": "give_item",
+            "parameters": {
+              "itemId": "herbal_tea",
+              "amount": 1,
+              "domain": "avg"
+            }
+          },
+          {
+            "code": "give_item",
+            "parameters": {
+              "itemId": "wet_umbrella",
+              "amount": 1,
+              "domain": "avg"
+            }
+          },
+          {
+            "code": "show_text",
+            "parameters": {
+              "characterId": "assistant",
+              "characterName": "Maya",
+              "text": "Detective \\N[detective]! The suspect Mr. Vance insists he stayed inside the cafe and never stepped out in the storm!",
+              "emotion": "normal"
+            }
+          },
+          {
+            "code": "show_choices",
+            "parameters": {
+              "prompt": "How would you like to proceed?",
+              "choices": [
+                {
+                  "label": "1. Investigate the Crime Scene in RPG Mode",
+                  "commands": [
+                    {
+                      "code": "switch_mode",
+                      "parameters": {
+                        "targetModeId": "rpg",
+                        "params": {
+                          "mapId": "town_square"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "label": "2. Confront Mr. Vance in Courtroom Debate",
+                  "commands": [
+                    {
+                      "code": "switch_mode",
+                      "parameters": {
+                        "targetModeId": "debate",
+                        "params": {
+                          "debateId": "trial_stolen_umbrella"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
