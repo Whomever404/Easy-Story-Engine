@@ -66,25 +66,27 @@ export class WebEditor {
     const topBar = document.createElement('div');
     topBar.style.cssText = `
       height: 52px; background: #161b2c; border-bottom: 1px solid rgba(255,255,255,0.12);
-      display: flex; justify-content: space-between; align-items: center; padding: 0 16px;
-      user-select: none;
+      display: flex; justify-content: space-between; align-items: center; padding: 0 18px;
+      user-select: none; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.4);
     `;
 
-    // Brand and Title
+    // Brand, Title & Breadcrumb
     topBar.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <span style="font-weight: 900; font-size: 16px; color: #64b5f6; letter-spacing: 1px;">⚡ 故事引擎 (ESE)</span>
-        <span style="font-size: 12px; background: #283593; padding: 2px 8px; border-radius: 4px; color: #bbdefb;" id="editor-proj-title">${this.projectData.manifest.name}</span>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-weight: 900; font-size: 16px; color: #64b5f6; letter-spacing: 1px; display: flex; align-items: center; gap: 6px;">
+          ⚡ 故事引擎 (ESE)
+        </span>
+        <span style="font-size: 12px; background: #283593; padding: 3px 10px; border-radius: 4px; color: #bbdefb; font-weight: 600;" id="editor-proj-title">${this.projectData.manifest.name}</span>
+        <span id="editor-breadcrumb" style="font-size: 12px; color: #94a3b8; margin-left: 8px;">/ 当前工作台: 流程图</span>
       </div>
-      <div id="editor-tabs-container" style="display: flex; gap: 4px;"></div>
-      <div style="display: flex; gap: 8px;">
-        <button id="btn-playtest" style="background: #2e7d32; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <button id="btn-playtest" style="background: linear-gradient(135deg, #2e7d32, #1b5e20); border: 1px solid #4caf50; border-radius: 6px; color: #fff; padding: 7px 16px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(46,125,50,0.4); transition: transform 0.15s;">
           ▶ 试玩游戏
         </button>
-        <button id="btn-export-esproj" style="background: #1565c0; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer;">
+        <button id="btn-export-esproj" style="background: #1565c0; border: none; border-radius: 6px; color: #fff; padding: 7px 14px; font-weight: bold; font-size: 12px; cursor: pointer; transition: 0.2s;">
           📦 导出工程包 (.esproj)
         </button>
-        <button id="btn-export-html" style="background: #6a1b9a; border: none; border-radius: 6px; color: #fff; padding: 6px 14px; font-weight: bold; cursor: pointer;">
+        <button id="btn-export-html" style="background: #6a1b9a; border: none; border-radius: 6px; color: #fff; padding: 7px 14px; font-weight: bold; font-size: 12px; cursor: pointer; transition: 0.2s;">
           🌐 导出网页版 (HTML5)
         </button>
       </div>
@@ -92,12 +94,27 @@ export class WebEditor {
 
     root.appendChild(topBar);
 
-    // 2. Editor Workspace Area
+    // 2. Main Content Split: Left Navigation Rail + Central Workbench
+    const mainBody = document.createElement('div');
+    mainBody.style.cssText = 'flex: 1; display: flex; overflow: hidden; position: relative;';
+
+    // Left Navigation Rail (Grouped Categorized Activity Bar)
+    const navRail = document.createElement('div');
+    navRail.id = 'editor-tabs-container';
+    navRail.style.cssText = `
+      width: 180px; background: #131726; border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex; flex-direction: column; overflow-y: auto; padding: 12px 8px; gap: 16px;
+      user-select: none;
+    `;
+    mainBody.appendChild(navRail);
+
+    // Center Workspace Area
     const workspace = document.createElement('div');
     workspace.id = 'editor-workspace';
-    workspace.style.cssText = 'flex: 1; display: flex; overflow: hidden; position: relative;';
-    root.appendChild(workspace);
+    workspace.style.cssText = 'flex: 1; display: flex; overflow: hidden; position: relative; background: #0f121d;';
+    mainBody.appendChild(workspace);
 
+    root.appendChild(mainBody);
     this.container.appendChild(root);
 
     this.renderTabs();
@@ -110,34 +127,85 @@ export class WebEditor {
     if (!tabContainer) return;
     tabContainer.innerHTML = '';
 
-    const tabs: { id: EditorViewTab; label: string }[] = [
-      { id: 'flowchart', label: '📊 流程图' },
-      { id: 'mindmap', label: '🧠 思维导图' },
-      { id: 'blocks', label: '🧱 指令积木' },
-      { id: 'tilemap', label: '🗺️ 瓦片地图' },
-      { id: 'characters', label: '👥 角色立绘' },
-      { id: 'database', label: '🗄️ 数据库属性' },
-      { id: 'messages', label: '💬 手机短信' },
-      { id: 'debate', label: '⚖️ 法庭辩论' },
-      { id: 'title', label: '🎨 标题画面' },
-      { id: 'plugins', label: '🔌 插件管理' },
+    const sections = [
+      {
+        title: '📖 剧情编排',
+        tabs: [
+          { id: 'flowchart' as EditorViewTab, label: '📊 流程图' },
+          { id: 'mindmap' as EditorViewTab, label: '🧠 思维导图' },
+          { id: 'blocks' as EditorViewTab, label: '🧱 Scratch积木' },
+        ],
+      },
+      {
+        title: '🎮 玩法模式',
+        tabs: [
+          { id: 'tilemap' as EditorViewTab, label: '🗺️ 瓦片地图' },
+          { id: 'debate' as EditorViewTab, label: '⚖️ 法庭辩论' },
+        ],
+      },
+      {
+        title: '📂 资产数据',
+        tabs: [
+          { id: 'characters' as EditorViewTab, label: '👥 角色立绘' },
+          { id: 'database' as EditorViewTab, label: '🗄️ 数据库属性' },
+          { id: 'messages' as EditorViewTab, label: '💬 手机短信' },
+        ],
+      },
+      {
+        title: '⚙️ 工程配置',
+        tabs: [
+          { id: 'title' as EditorViewTab, label: '🎨 标题画面' },
+          { id: 'plugins' as EditorViewTab, label: '🔌 插件管理' },
+        ],
+      },
     ];
 
-    tabs.forEach((t) => {
-      const btn = document.createElement('button');
-      const isAct = this.currentTab === t.id;
-      btn.innerText = t.label;
-      btn.style.cssText = `
-        padding: 6px 12px; font-size: 12px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer;
-        background: ${isAct ? '#1e263d' : 'transparent'}; color: ${isAct ? '#64b5f6' : '#aaa'}; transition: 0.2s;
-      `;
-      btn.onclick = () => {
-        this.currentTab = t.id;
-        this.renderTabs();
-        this.renderActiveView();
-      };
-      tabContainer.appendChild(btn);
+    sections.forEach((sec) => {
+      const group = document.createElement('div');
+      group.style.cssText = 'display: flex; flex-direction: column; gap: 3px;';
+
+      const secTitle = document.createElement('div');
+      secTitle.style.cssText = 'font-size: 11px; font-weight: bold; color: #64748b; padding: 4px 8px; text-transform: uppercase; letter-spacing: 0.5px;';
+      secTitle.innerText = sec.title;
+      group.appendChild(secTitle);
+
+      sec.tabs.forEach((t) => {
+        const btn = document.createElement('button');
+        const isAct = this.currentTab === t.id;
+        btn.innerText = t.label;
+        btn.style.cssText = `
+          padding: 8px 12px; font-size: 13px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer;
+          background: ${isAct ? '#2563eb' : 'transparent'}; color: ${isAct ? '#fff' : '#94a3b8'};
+          text-align: left; transition: all 0.15s; display: flex; align-items: center; gap: 8px;
+        `;
+        btn.onmouseenter = () => {
+          if (this.currentTab !== t.id) {
+            btn.style.background = 'rgba(255,255,255,0.06)';
+            btn.style.color = '#fff';
+          }
+        };
+        btn.onmouseleave = () => {
+          if (this.currentTab !== t.id) {
+            btn.style.background = 'transparent';
+            btn.style.color = '#94a3b8';
+          }
+        };
+        btn.onclick = () => {
+          this.currentTab = t.id;
+          this.renderTabs();
+          this.renderActiveView();
+          this.updateBreadcrumb(t.label);
+        };
+        group.appendChild(btn);
+      });
+
+      tabContainer.appendChild(group);
     });
+  }
+
+  private updateBreadcrumb(label: string): void {
+    const bc = this.container.querySelector('#editor-breadcrumb');
+    if (bc) bc.textContent = `/ 当前工作台: ${label}`;
   }
 
   private renderActiveView(): void {
@@ -298,7 +366,19 @@ export class WebEditor {
         </select>
       </div>
       <div id="inspector-type-specific"></div>
+      <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);">
+        <button id="btn-open-node-blocks" style="width: 100%; background: #4C97FF; border: none; border-radius: 6px; color: #fff; padding: 9px 12px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 10px rgba(76,151,255,0.3);">
+          🧱 在 Scratch 积木中编写指令
+        </button>
+      </div>
     `;
+
+    inspector.querySelector('#btn-open-node-blocks')?.addEventListener('click', () => {
+      this.currentTab = 'blocks';
+      this.renderTabs();
+      this.renderActiveView();
+      this.updateBreadcrumb('Scratch 积木代码');
+    });
 
     inspector.querySelector('#close-inspector')?.addEventListener('click', () => inspector.remove());
     inspector.querySelector('#node-title-inp')?.addEventListener('input', (e: any) => {

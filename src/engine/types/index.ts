@@ -515,18 +515,36 @@ export interface SystemSettings {
 export interface TitleMenuButton {
   id: string;
   label: string;
-  action: 'new_game' | 'continue' | 'settings' | 'achievements' | 'gallery' | 'exit';
+  action: 'new_game' | 'continue' | 'settings' | 'achievements' | 'gallery' | 'exit' | 'jump_story' | string;
   targetStoryLabel?: string;
+  enabled?: boolean;
+}
+
+export interface TitleClickableElement {
+  id: string;
+  name: string;
+  type: 'title_text' | 'logo' | 'hotspot' | 'button';
+  x: number;
+  y: number;
+  width?: number;
+  height?: number;
+  action: 'new_game' | 'continue' | 'settings' | 'achievements' | 'gallery' | 'jump_story' | 'play_se' | 'none';
+  targetStoryLabel?: string;
+  soundEffect?: string;
+  tooltip?: string;
 }
 
 export interface TitleLayoutConfig {
   logoImage?: string;
   titleText: string;
+  subtitleText?: string;
   bgImage?: string;
   bgmTrack?: string;
   cursorSe?: string;
   confirmSe?: string;
   buttons: TitleMenuButton[];
+  clickableElements?: TitleClickableElement[];
+  layoutTheme?: 'centered' | 'left_vertical' | 'bottom_horizontal' | 'custom_freeform';
 }
 
 export interface AssetRecord {

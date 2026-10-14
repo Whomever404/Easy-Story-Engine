@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "node -e \"eval(require('fs').readFileSync('build.cjs','utf8'))\"",
     "preview": "vite preview",
     "test": "vitest run"
   },
